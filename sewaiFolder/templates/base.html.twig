@@ -38,7 +38,7 @@
 									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Courses</a>
 								</li>
 								<li>
-									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Team</a>
 								</li>
 							</ul>
 						</div>
@@ -65,7 +65,7 @@
 									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Courses</a>
 								</li>
 								<li>
-									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Team</a>
 								</li>
 							</ul>
 						</div>
@@ -75,20 +75,46 @@
 
 		{% endblock %}
 		{% block body %}
-			<div class="flex flex-col justify-center items-center h-screen text-center">
+			<div class="flex flex-col justify-center items-center text-center py-[14.3rem]">
 				<h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-black md:text-5xl lg:text-6xl">
 					Inner strength. Outer calm. Healing synergy.
 				</h1>
-				<p class="mb-6 text-lg font-normal text-gray-400 lg:text-xl sm:px-16 xl:px-48">
+				<p class="mb-6 text-[24px] font-normal text-gray-400 xl:px-48 mx-28">
 					Sewai offers self-paced, auto-learning courses designed to empower you with the tools to understand, heal, and grow. From managing anxiety and depression to practicing mindfulness and self-care, our practical lessons help you build inner strength and outer calm. Take control of your well-being—one lesson at a time.
 				</p>
-				<a href="{{ path('login') }}" class="rounded-[30px] text-xl inline-flex items-center justify-center px-5 py-3 font-semibold text-center text-white bg-gray-500 hover:bg-gray-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-					Get started
-					<svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 14 10">
-						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-					</svg>
+				<a href="{{ path('login') }}" class="w-40 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-[30px] group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200">
+					<span class="w-40 relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-[30px] group-hover:bg-opacity-0 text-xl font-semibold">
+						Get started
+					</span>
 				</a>
 			</div>
+
+
+		{% endblock %}
+		{% block footer %}
+			<footer class="bg-lime-100 shadow">
+				<div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+					<span class="text-sm text-gray-900">© 2024
+						<span class="font-bold">sewai</span>
+						by
+						<a href="https://github.com/Gyomiel" class="font-bold hover:underline">Gyomiel</a>. All Rights Reserved.
+					</span>
+					<ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+						<li>
+							<a href="#" class="hover:underline me-4 md:me-6">About</a>
+						</li>
+						<li>
+							<a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+						</li>
+						<li>
+							<a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+						</li>
+						<li>
+							<a href="#" class="hover:underline">Contact</a>
+						</li>
+					</ul>
+				</div>
+			</footer>
 
 
 		{% endblock %}
