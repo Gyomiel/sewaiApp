@@ -27,7 +27,7 @@
 							<img src="{{ asset('imgs/sewaiLogoBlack.png') }}" class="h-8"/>
 						</a>
 						<div class="bg-green-500 flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-							<button type="button" class="text-white bg-black hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-3xl text-lg px-4 py-2 text-center" onclick="window.location.href='{{ path('login') }}'">Log in</button>
+							<button type="button" class="text-white bg-black hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-[30px] text-lg px-4 py-2 text-center" onclick="window.location.href='{{ path('login') }}'">Log in</button>
 						</div>
 						<div class="bg-green-500 items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
 							<ul class="bg-green-500 flex flex-col font-semibold text-xl p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
@@ -54,7 +54,7 @@
 							<img src="{{ asset('imgs/sewaiLogoBlack.png') }}" class="h-8"/>
 						</a>
 						<div class="bg-green-500 flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-							<button type="button" class="text-white bg-black hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-3xl text-lg px-4 py-2 text-center" onclick="window.location.href='{{ path('app_logout') }}'">Logout</button>
+							<button type="button" class="text-white bg-black hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-[30px] text-lg px-4 py-2 text-center" onclick="window.location.href='{{ path('app_logout') }}'">Logout</button>
 						</div>
 						<div class="bg-green-500 items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
 							<ul class="bg-green-500 flex flex-col font-semibold text-xl p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
@@ -71,13 +71,26 @@
 						</div>
 					</div>
 				</nav>
-                {% endif %}
+			{% endif %}
 
-			{% endblock %}
-			{% block body %}
+		{% endblock %}
+		{% block body %}
+			<div class="flex flex-col justify-center items-center h-screen text-center">
+				<h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-black md:text-5xl lg:text-6xl">
+					Inner strength. Outer calm. Healing synergy.
+				</h1>
+				<p class="mb-6 text-lg font-normal text-gray-400 lg:text-xl sm:px-16 xl:px-48">
+					Sewai offers self-paced, auto-learning courses designed to empower you with the tools to understand, heal, and grow. From managing anxiety and depression to practicing mindfulness and self-care, our practical lessons help you build inner strength and outer calm. Take control of your well-being—one lesson at a time.
+				</p>
+				<a href="{{ path('login') }}" class="rounded-[30px] text-xl inline-flex items-center justify-center px-5 py-3 font-semibold text-center text-white bg-gray-500 hover:bg-gray-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+					Get started
+					<svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 14 10">
+						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+					</svg>
+				</a>
+			</div>
 
-            
-            {% endblock %}
-		</body>
+
+		{% endblock %}
 	</body>
-</html>
+</html></body></html>
