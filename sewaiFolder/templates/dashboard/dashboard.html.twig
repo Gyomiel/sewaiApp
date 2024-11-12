@@ -1,5 +1,27 @@
 {% extends 'base.html.twig' %}
 
+{% block section %}
+	<title>
+		{% block title %}sewai | Dashboard
+		{% endblock %}
+	</title>
+{% endblock %}
+
 {% block body %}
-<p>This is the dashboard.</p>
+	<div>
+
+		<div class="flex items-center gap-4">
+			<img class="w-10 h-10 rounded-full" src="{{user.profilePic}}" alt="">
+			<div class="font-medium text-black">
+				<div>{{user.username}}</div>
+				<div class="text-sm text-gray-500 dark:text-gray-400">{{user.email}}</div>
+			</div>
+		</div>
+
+		<a href="{{ path('app_user_edit', {'id': user.id}) }}">
+			<img src="{{ asset('imgs/editIcon.png') }}" class="w-3" alt="Edit">
+		</a>
+
+
+	</div>
 {% endblock %}

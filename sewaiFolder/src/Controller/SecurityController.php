@@ -28,4 +28,15 @@ class SecurityController extends AbstractController
     public function logout() {
         return $this->redirectToRoute('home');
     }
+
+    #[Route('/dashboard', name: 'dashboard')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function index(): Response
+    {
+        $user = $this->getUser();
+        return $this->render('dashboard/dashboard.html.twig', [
+            'controller_name' => 'UserController',
+            'user' => $user
+        ]);
+    }
 }
