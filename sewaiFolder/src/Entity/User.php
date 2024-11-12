@@ -35,19 +35,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $firstName = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $lastName = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
+    private ?\DateTimeInterface $createdAt;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $profilePic = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $streakCount = null;
 
     #[ORM\ManyToMany(targetEntity: UserTracking::class, mappedBy: 'user_id')]
@@ -55,6 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->createdAt = new \DateTimeImmutable();
         $this->userTrackings = new ArrayCollection();
     }
 

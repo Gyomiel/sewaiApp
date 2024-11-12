@@ -1,20 +1,83 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}sewai | Home
+			{% endblock %}
+		</title>
+		<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+			<link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+		{% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-            {{ importmap() }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+			{{ importmap() }}
+		{% endblock %}
+	</head>
+	<body>
+		{% block header %}
+			{% if not app.user %}
+				<nav class="bg-green-500 border-gray-200 dark:bg-gray-900">
+					<div class="bg-green-500 flex items-center justify-between p-4">
+						<a href="{{ path('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+							<img src="{{ asset('imgs/sewaiLogoBlack.png') }}" class="h-8"/>
+						</a>
+						<div class="bg-green-500 flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+							<button type="button" class="text-white bg-black hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-3xl text-lg px-4 py-2 text-center" onclick="window.location.href='{{ path('login') }}'">Log in</button>
+						</div>
+						<div class="bg-green-500 items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+							<ul class="bg-green-500 flex flex-col font-semibold text-xl p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+								<li class="bg-green-500">
+									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+								</li>
+								<li class="bg-green-500">
+									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Courses</a>
+								</li>
+								<li>
+									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			{% endif %}
+
+			{% if app.user %}
+
+				<nav class="bg-green-500 border-gray-200 dark:bg-gray-900">
+					<div class="bg-green-500 flex items-center justify-between p-4">
+						<a href="{{ path('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+							<img src="{{ asset('imgs/sewaiLogoBlack.png') }}" class="h-8"/>
+						</a>
+						<div class="bg-green-500 flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+							<button type="button" class="text-white bg-black hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-3xl text-lg px-4 py-2 text-center" onclick="window.location.href='{{ path('app_logout') }}'">Logout</button>
+						</div>
+						<div class="bg-green-500 items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+							<ul class="bg-green-500 flex flex-col font-semibold text-xl p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+								<li class="bg-green-500">
+									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+								</li>
+								<li class="bg-green-500">
+									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Courses</a>
+								</li>
+								<li>
+									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+                {% endif %}
+
+			{% endblock %}
+			{% block body %}
+
+            
+            {% endblock %}
+		</body>
+	</body>
 </html>
