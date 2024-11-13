@@ -8,45 +8,48 @@
 		<div class="w-[500px] bg-gray-200 rounded-[30px] py-14">
 			{{ form_start(registrationForm) }}
 
-			<h2 class="text-center text-4xl font-semibold mb-7">Sign Up</h2>
+			<h2 class="text-center text-4xl font-semibold mb-7">You deserve this step</h2>
 
-			<div class="grid gap-6 mb-6 md:grid-cols-2">
-				<div class="form-group">
-					<label for="{{ registrationForm.username.vars.id }}" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Name</label>
-					{{ form_widget(registrationForm.username, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'}}) }}
+			<div class="w-[500px] bg-gray-200 rounded-[30px]">
+				<div class="form-group mx-14 mb-6">
+					<label for="{{ registrationForm.username.vars.id }}" class="block mb-2 text-lg font-bold text-gray-900">Name</label>
+					{{ form_widget(registrationForm.username, {'attr': {'class': 'text-gray-900 text-lg rounded-[30px] block w-full p-2 mb-8'}}) }}
+
 					{{ form_errors(registrationForm.username) }}
 				</div>
 			</div>
 
-			<div class="form-group mb-6">
-				<label for="{{ registrationForm.email.vars.id }}" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Email address</label>
-				{{ form_widget(registrationForm.email, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'}}) }}
+			<div class="form-group mx-14 mb-6">
+				<label for="{{ registrationForm.email.vars.id }}" class="block mb-2 text-lg font-bold text-gray-900">Email address</label>
+				{{ form_widget(registrationForm.email, {'attr': {'class': 'text-gray-900 text-lg rounded-[30px] block w-full p-2 mb-8'}}) }}
 				{{ form_errors(registrationForm.email) }}
 			</div>
 
-			<div class="form-group mb-6">
-				<label for="{{ registrationForm.plainPassword.vars.id }}" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Password</label>
-				{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'}}) }}
+			<div class="form-group mx-14 mb-6">
+				<label for="{{ registrationForm.plainPassword.vars.id }}" class="block mb-2 text-lg font-bold text-gray-900">Password</label>
+				{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'text-gray-900 text-lg rounded-[30px] block w-full p-2 mb-10'}}) }}
 				{{ form_errors(registrationForm.plainPassword) }}
 			</div>
 
 			<div class="form-group mb-6 flex items-center justify-center">
 				{{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'mr-2'}}) }}
-				<label for="{{ registrationForm.agreeTerms.vars.id }}" class="text-sm font-normal text-gray-900 dark:text-white">
+				<label for="{{ registrationForm.agreeTerms.vars.id }}" class="text-[16px] font-normal text-gray-900">
 					I agree to the
-					<a href="#" class="text-gray-900 hover:underline">Terms and Conditions</a>.
+					<a href="#" class="text-teal-600 hover:underline">Terms and Conditions</a>.
 				</label>
 				{{ form_errors(registrationForm.agreeTerms) }}
 			</div>
 
 			<div class="flex justify-center">
-				<button type="submit" class="text-white bg-gradient-to-br from-teal-300 to-lime-300 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-lime-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-					Sign Up
+				<button type="submit" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-lg font-semibold text-gray-900 rounded-[30px] group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200">
+					<span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-[30px] group-hover:bg-opacity-0">
+						Sign up
+					</span>
 				</button>
+
 			</div>
 
 			{{ form_end(registrationForm) }}
 		</div>
 	</div>
 {% endblock %}
-

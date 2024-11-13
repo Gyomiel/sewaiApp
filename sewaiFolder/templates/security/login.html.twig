@@ -5,14 +5,19 @@
 
 {% block body %}
 	<form method="post">
-		{% if error %}
-			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-		{% endif %}
 		<div class="flex items-center justify-center h-[726px] bg-gray-100">
 			<div class="w-[500px] bg-gray-200 rounded-[30px] py-14">
 				{% if error %}
-					<div class="alert alert-danger font-medium bg-red-300 text-red-500 text-center mb-4 rounded">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					<div class="flex items-center justify-center p-4 mb-4 text-lg text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 w-full" role="alert">
+						<svg class="w-4 h-4 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewbox="0 0 20 20">
+							<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+						</svg>
+						<div class="text-center ml-2">
+							<span class="font-lg">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+						</div>
+					</div>
 				{% endif %}
+
 
 				<form method="post">
 					<div class="form-group mx-14">
