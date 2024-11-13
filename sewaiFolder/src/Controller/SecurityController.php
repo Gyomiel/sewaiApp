@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Repository\CourseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class SecurityController extends AbstractController
 {
@@ -31,12 +33,14 @@ class SecurityController extends AbstractController
 
     #[Route('/dashboard', name: 'dashboard')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function index(): Response
+    public function index(CourseRepository $courseRepository): Response
     {
+        $courses = $courseRepository->findAll();
         $user = $this->getUser();
         return $this->render('dashboard/dashboard.html.twig', [
             'controller_name' => 'UserController',
-            'user' => $user
+            'user' => $user,
+            'courses' => $courses
         ]);
     }
 }
