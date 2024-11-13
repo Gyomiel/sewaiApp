@@ -34,6 +34,9 @@ class Course
     #[ORM\ManyToMany(targetEntity: UserTracking::class, mappedBy: 'course_id')]
     private Collection $userTrackings;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $profilePic = null;
+
     public function __construct()
     {
         $this->userTrackings = new ArrayCollection();
@@ -127,6 +130,18 @@ class Course
         if ($this->userTrackings->removeElement($userTracking)) {
             $userTracking->removeCourseId($this);
         }
+
+        return $this;
+    }
+
+    public function getProfilePic(): ?string
+    {
+        return $this->profilePic;
+    }
+
+    public function setProfilePic(?string $profilePic): static
+    {
+        $this->profilePic = $profilePic;
 
         return $this;
     }
