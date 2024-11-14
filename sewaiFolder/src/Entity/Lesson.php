@@ -16,9 +16,6 @@ class Lesson
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $course_id = null;
-
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
@@ -43,6 +40,10 @@ class Lesson
     #[ORM\OneToMany(targetEntity: Question::class, mappedBy: 'lesson_id', orphanRemoval: true)]
     private Collection $questions;
 
+    #[ORM\ManyToOne(targetEntity: Course::class, inversedBy: 'lessons')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Course $course = null;
+
     public function __construct()
     {
         $this->userTrackings = new ArrayCollection();
@@ -54,14 +55,14 @@ class Lesson
         return $this->id;
     }
 
-    public function getCourseId(): ?int
+    public function getCourse(): ?Course
     {
-        return $this->course_id;
+        return $this->course;
     }
 
-    public function setCourseId(int $course_id): static
+    public function setCourse(?Course $course): static
     {
-        $this->course_id = $course_id;
+        $this->course = $course;
 
         return $this;
     }

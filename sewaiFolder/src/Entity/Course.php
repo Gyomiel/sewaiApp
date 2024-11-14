@@ -37,9 +37,13 @@ class Course
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $profilePic = null;
 
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Lesson::class)]
+    private Collection $lessons;
+
     public function __construct()
     {
         $this->userTrackings = new ArrayCollection();
+        $this->lessons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -142,6 +146,29 @@ class Course
     public function setProfilePic(?string $profilePic): static
     {
         $this->profilePic = $profilePic;
+
+        return $this;
+    }
+
+    public function getLessons(): Collection {
+        return $this->lessons;
+    }
+
+    public function addLesson(Lesson $lesson): static {
+        if (!$this->lessons->contains($lesson)) {
+            $this->lessons->add($lesson);
+            $lesson->setCourse($this);
+        }
+        
+        return $this;
+    }
+
+    public function removeLesson(Lesson $lesson): static {
+        if ($this->lessons->removeElement($lesson)) {
+            if ($lesson->getCourse() === $this) {
+                $lesson->setCourse(null);
+            }
+        }
 
         return $this;
     }
