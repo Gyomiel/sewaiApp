@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lesson{% endblock %}
+
+{% block body %}
+    <h1>Lesson</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{{ lesson.title }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ lesson.content }}</td>
+            </tr>
+            <tr>
+                <th>Lesson Number</th>
+                <td>{{ lesson.lessonNumber }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('dashboard', {'course_id': lesson.course.id}) }}" class="btn btn-secondary">Back to Lessons</a>
+
+{% endblock %}

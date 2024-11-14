@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\CourseRepository;
+use App\Repository\LessonRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,12 +35,14 @@ class SecurityController extends AbstractController
 
     #[Route('/dashboard', name: 'dashboard')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function index(Request $request, CourseRepository $courseRepository): Response
+    public function index(Request $request, CourseRepository $courseRepository, LessonRepository $lessonRepository): Response
     {
         $courses = $courseRepository->findAll();
+        $lessons = $lessonRepository->findAll();
         $user = $this->getUser();
 
         $courseId = $request->get('course_id');
+        $lessonId = $request->get('lesson_id');
 
         if ($courseId) {
             $course = $courseRepository->find($courseId);
@@ -48,11 +51,22 @@ class SecurityController extends AbstractController
             $course = null;
         }
 
+        if ($lessonId) {
+            $lesson = $lessonRepository->find($lessonId);
+            $course = null;
+            $courses = null;
+            $lessons = null;
+        } else {
+            $lesson = null;
+        }
+
         return $this->render('dashboard/dashboard.html.twig', [
             'controller_name' => 'UserController',
             'user' => $user,
             'courses' => $courses,
-            'selectedCourse' => $course
+            'selectedCourse' => $course,
+            'lessons' => $lessons,
+            'selectedLesson' => $lesson,
         ]);
     }
 }

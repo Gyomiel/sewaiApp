@@ -78,14 +78,13 @@
 			</div>
 		</div>
 
-		<div class="courses-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+		<div class="courses-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
 			{% for course in courses %}
-				<a href="{{ path('dashboard', {'course_id': course.id}) }}" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 w-[500px] max-h-56">
+				<a href="{{ path('dashboard', {'course_id': course.id}) }}" class="flex flex-col items-center bg-white border border-gray-200 rounded-[30px] shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 w-[620px]">
 					<img class="object-cover w-full h-full md:w-48 md:rounded-none md:rounded-s-lg" src="{{ course.profilePic | default('imgs/courseDefaultPfp.png') }}" alt="">
 					<div class="flex flex-col justify-between p-4 leading-normal">
 						<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course.title }}</h5>
 						<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ course.description }}</p>
-						<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ course.category }}</p>
 					</div>
 				</a>
 
@@ -93,15 +92,28 @@
 
 			{% if selectedCourse %}
 				<div>
-					<h2>{{ selectedCourse.title }}</h2>
+					<h2 class="text-center">{{ selectedCourse.title }}</h2>
+					{% if selectedCourse.lessons %}
+					{% for lesson in selectedCourse.lessons %}
+						<a href="{{ path('dashboard', {'lesson_id': lesson.id}) }}"><h2>{{ lesson.lessonNumber }}. {{ lesson.title }}</h2></a>
+					{% endfor %}
+						{% if selectedLesson %}
+							<div>
+								<h2>Lesson title: {{ selectedLesson.title }}</h2>
+							</div>
+							{% endif %}
+					{% endif %}
 
 					<a href="{{ path('dashboard') }}" class="btn btn-secondary">Back to Courses</a>
 				</div>
 			{% endif %}
-			<div>
-				<div>TEST TEST TEST TEST TEST</div>
-				<div>TEST TEST TEST TEST TEST</div>
-			</div>
+			{% if selectedLesson %}
+				<div>
+					<h2 class="text-center">{{ selectedLesson.lessonNumber }}. {{ selectedLesson.title }}</h2>
+					<p>{{ selectedLesson.content }}</p>
+					<a href="{{ path('dashboard', {'course_id': selectedLesson.course.id}) }}" class="btn btn-secondary">Back to Lessons</a>
+				</div>
+			{% endif %}
 		</div>
 	</div>
 
@@ -119,7 +131,7 @@
 			grid-template-columns: 1fr;
 			gap: 2rem;
 			justify-items: center;
-			grid-template-rows: 200px 200px
+			grid-template-rows: 250px 250px
 		}
 	</style>
 {% endblock %}
