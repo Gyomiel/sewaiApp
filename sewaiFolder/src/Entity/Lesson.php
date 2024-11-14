@@ -34,7 +34,7 @@ class Lesson
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\ManyToMany(targetEntity: UserTracking::class, mappedBy: 'lession_id')]
+    #[ORM\ManyToMany(targetEntity: UserTracking::class, mappedBy: 'lesson_id')]
     private Collection $userTrackings;
 
     #[ORM\OneToMany(targetEntity: Question::class, mappedBy: 'lesson_id', orphanRemoval: true)]

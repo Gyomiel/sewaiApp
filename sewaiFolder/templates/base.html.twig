@@ -18,7 +18,7 @@
 			{{ importmap() }}
 		{% endblock %}
 	</head>
-	<body>
+	<body class="flex flex-col min-h-screen">
 		{% block header %}
 			{% if not app.user %}
 				<nav class="bg-green-500 border-gray-200 dark:bg-gray-900">
@@ -80,7 +80,7 @@
 
 		{% endblock %}
 		{% block body %}
-			<div class="flex flex-col justify-center items-center text-center py-[14.3rem]">
+			<div class="flex flex-col flex-grow items-center text-center py-[14.3rem]">
 				<h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-black md:text-5xl lg:text-6xl">
 					Inner strength. Outer calm. Healing synergy.
 				</h1>
@@ -93,11 +93,10 @@
 					</span>
 				</a>
 			</div>
-
-
 		{% endblock %}
+
 		{% block footer %}
-			<footer class="bg-lime-100 shadow">
+			<footer class="w-full bg-lime-100 shadow">
 				<div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
 					<span class="text-sm text-gray-900">© 2024
 						<span class="font-bold">sewai</span>
