@@ -1,0 +1,12 @@
+<div class="relative w-full h-[136px]">
+	<div class="absolute inset-0 bg-cover bg-center opacity-50" style="background-image: url('{{ asset('imgs/courseHeroImg.jpg') }}');"></div>
+	<p class="font-bold text-3xl text-center py-14 relative z-10">COHORTS</p>
+</div>
+
+<div class="grid grid-cols-3 grid-rows-[1fr 1fr] w-[100%] h-[80%] place-items-center">
+	{% import '_macros/courses.html.twig' as courses %}
+
+	{% for course in courses %}
+		{{ courses.course_card(course) }}
+	{% endfor %}
+</div>

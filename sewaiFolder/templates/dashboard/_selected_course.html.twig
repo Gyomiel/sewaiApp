@@ -1,0 +1,63 @@
+<div>
+	<h2 class="text-center">{{ selectedCourse.title }}</h2>
+
+	{% if selectedCourse %}
+		<div
+			class="courseTemplate grid">
+			<div id="course-description">
+				<p>Course description goes here for
+					{{ selectedCourse.title }}.</p>
+			</div>
+
+			<div id="lesson-content" style="display: {% if selectedLesson %} block {% else %} none {% endif %};">
+				{% if selectedLesson %}
+					<h2>{{ selectedLesson.title }}</h2>
+					<p>{{ selectedLesson.content }}</p>
+					<button onclick="goBackToCourse()">Back to Course</button>
+				{% endif %}
+			</div>
+
+			<div class="lessons-list">
+				{% for lesson in selectedCourse.lessons %}
+					<a href="javascript:void(0);" class="lesson-link" data-lesson-id="{{ lesson.id }}">
+						<h2>{{ lesson.lessonNumber }}.
+							{{ lesson.title }}</h2>
+					</a>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
+
+	{% if selectedLesson %}
+		<div>
+			<h2>Lesson title:
+				{{ selectedLesson.title }}</h2>
+		</div>
+	{% endif %}
+
+	<script>
+	document.addEventListener('DOMContentLoaded', function() {
+    const lessonLinks = document.querySelectorAll('.lesson-link');
+
+    lessonLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            const lessonId = this.getAttribute('data-lesson-id');
+
+            fetch(`/dashboard/lesson/${lessonId}`)
+                .then(response => response.text())
+                .then(data => {
+                    const lessonContent = document.getElementById('lesson-content');
+                    lessonContent.innerHTML = data;
+                    lessonContent.style.display = "block";
+                    document.getElementById("course-description").style.display = "none";
+                })
+                .catch(error => {
+                    console.error('Error fetching lesson content:', error);
+                });
+        });
+    });
+});
+	</script>
+
+	<a href="{{ path('dashboard') }}" class="btn btn-secondary">Back to Courses</a>
+</div>

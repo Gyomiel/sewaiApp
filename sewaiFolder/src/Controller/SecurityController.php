@@ -35,31 +35,34 @@ class SecurityController extends AbstractController
 
     #[Route('/dashboard', name: 'dashboard')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function index(Request $request, CourseRepository $courseRepository, LessonRepository $lessonRepository): Response
+    public function index(
+        Request $request,
+        CourseRepository $courseRepository,
+        LessonRepository $lessonRepository
+    ): Response
     {
+
         $courses = $courseRepository->findAll();
         $lessons = $lessonRepository->findAll();
         $user = $this->getUser();
-
+    
         $courseId = $request->get('course_id');
         $lessonId = $request->get('lesson_id');
-
+    
+        $course = null;
+        $lesson = null;
+    
         if ($courseId) {
             $course = $courseRepository->find($courseId);
-            $courses = null;
-        } else {
-            $course = null;
+            $lessons = $course ? $course->getLessons() : [];
         }
-
+    
         if ($lessonId) {
             $lesson = $lessonRepository->find($lessonId);
             $course = null;
             $courses = null;
-            $lessons = null;
-        } else {
-            $lesson = null;
         }
-
+    
         return $this->render('dashboard/dashboard.html.twig', [
             'controller_name' => 'UserController',
             'user' => $user,
@@ -69,4 +72,5 @@ class SecurityController extends AbstractController
             'selectedLesson' => $lesson,
         ]);
     }
+    
 }

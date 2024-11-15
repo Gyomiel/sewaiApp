@@ -1,0 +1,7 @@
+<div>
+	<h2 class="text-center">{{ selectedLesson.lessonNumber }}.
+		{{ selectedLesson.title }}</h2>
+	<p>{{ selectedLesson.content }}</p>
+
+	<a href="{{ path('dashboard', {'course_id': selectedLesson.course.id}) }}" class="btn btn-secondary">Back to Lessons</a>
+</div>
