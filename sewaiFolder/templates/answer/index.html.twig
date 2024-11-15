@@ -6,25 +6,18 @@
     <div class="dashboard-container wasili">
         <div class="profile-sidebar-container flex flex-col gap-4 w-72">
             <div class="p-7 flex items-center gap-4">
-                <img class="w-16 h-16 rounded-full" src="{{ user.profilePic | default('imgs/userDefaultPfp.png') }}" alt="Profile Picture">
+                <img class="w-16 h-16 rounded-full" src="{{ app.user.profilePic | default('imgs/userDefaultPfp.png') }}" alt="Profile Picture">
                 <div class="font-medium text-black">
-                    <div class="text-xl font-semibold">{{ user.username }}</div>
+                    <div class="text-xl font-semibold">{{ app.user.username }}</div>
                     <div class="text-lg text-gray-500 flex items-center gap-2">
-                        <span>{{ user.email }}</span>
+                        <span>{{ app.user.email }}</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="answer-container">
-            <h2>Submit your answer</h2>
-
-            <form action="{{ path('aiAnswer') }}" method="POST">
-                <textarea name="answer" placeholder="Type your answer here" required></textarea>
-                <button type="submit">Submit answer</button>
-            </form>
-
-            <div class="feedback"></div>
+           <h2>{{ response }}</h2>
         </div>
     </div>
 
@@ -35,38 +28,4 @@
         }
     </style>
 
-    {% block javascripts %}
-        {{ parent() }}
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const form = document.querySelector('form');
-                const feedbackContainer = document.querySelector('.feedback');
-
-                form.addEventListener('submit', function (event) {
-                    event.preventDefault(); // Prevent normal form submission
-
-                    const formData = new FormData(form);
-                    const answer = formData.get('answer');
-
-                    feedbackContainer.innerHTML = 'Loading feedback...';
-
-                    fetch("{{ path('aiAnswer') }}", {
-                        method: 'POST',
-                        body: formData
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.error) {
-                                feedbackContainer.innerHTML = `<p>Error: ${data.error}</p>`;
-                            } else {
-                                feedbackContainer.innerHTML = `<p><strong>GPT-4 Feedback:</strong> ${data.choices[0].message.content}</p>`;
-                            }
-                        })
-                        .catch(error => {
-                            feedbackContainer.innerHTML = `<p>Error: ${error.message}</p>`;
-                        });
-                });
-            });
-        </script>
-    {% endblock %}
 {% endblock %}

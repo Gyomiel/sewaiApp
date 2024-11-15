@@ -10,47 +10,11 @@
 
             <form action="{{ path('aiAnswer') }}" method="POST" data-question-id="{{ question.id }}">
                 <textarea name="answer" placeholder="Type your answer here."></textarea>
+                <input type="hidden" name="question_id" value="{{ question.id }}">
                 <button type="submit">Submit answer</button>
             </form>
-            <div id="feedback-{{ question.id }}"></div>
         {% endfor %}
     {% endif %}
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const forms = document.querySelectorAll('form[data-question-id]');
-        forms.forEach(function(form) {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
 
-                const questionId = form.getAttribute('data-question-id');
-                const answerText = form.querySelector('textarea[name="answer"]').value;
-                const feedbackContainer = document.getElementById(`feedback-${questionId}`);
-
-                feedbackContainer.innerHTML = 'Loading feedback...';
-
-                fetch("{{ path('aiAnswer') }}", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams({
-                        answer: answerText,
-                    }),
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.error) {
-                            feedbackContainer.innerHTML = `<p>Error: ${data.error}</p>`;
-                        } else {
-                            feedbackContainer.innerHTML = `<p><strong>Feedback:</strong> ${data.choices[0].message.content}</p>`;
-                        }
-                    })
-                    .catch(error => {
-                        feedbackContainer.innerHTML = `<p>Error: ${error.message}</p>`;
-                    });
-            });
-        });
-    });
-</script>
