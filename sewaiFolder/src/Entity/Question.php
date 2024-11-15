@@ -17,7 +17,7 @@ class Question
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'questions')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'lesson_id_id', referencedColumnName: 'id', nullable: false)]
     private ?Lesson $lesson_id = null;
 
     #[ORM\Column(length: 255)]

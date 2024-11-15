@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\CourseRepository;
 use App\Repository\LessonRepository;
+use App\Repository\QuestionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,7 +39,8 @@ class SecurityController extends AbstractController
     public function index(
         Request $request,
         CourseRepository $courseRepository,
-        LessonRepository $lessonRepository
+        LessonRepository $lessonRepository,
+        QuestionRepository $questionRepository,
     ): Response
     {
 
@@ -48,9 +50,10 @@ class SecurityController extends AbstractController
     
         $courseId = $request->get('course_id');
         $lessonId = $request->get('lesson_id');
-    
+
         $course = null;
         $lesson = null;
+        $questions = [];
     
         if ($courseId) {
             $course = $courseRepository->find($courseId);
@@ -59,6 +62,7 @@ class SecurityController extends AbstractController
     
         if ($lessonId) {
             $lesson = $lessonRepository->find($lessonId);
+            $questions = $questionRepository->findBy(['lesson' => $lesson]);
             $course = null;
             $courses = null;
         }
@@ -70,6 +74,7 @@ class SecurityController extends AbstractController
             'selectedCourse' => $course,
             'lessons' => $lessons,
             'selectedLesson' => $lesson,
+            'questions' => $questions,
         ]);
     }
     

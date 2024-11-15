@@ -16,6 +16,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class CourseController extends AbstractController
 {
     #[Route('/', name: 'app_course_index', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(CourseRepository $courseRepository): Response
     {
         return $this->render('course/index.html.twig', [
@@ -24,6 +25,7 @@ class CourseController extends AbstractController
     }
 
     #[Route('/new', name: 'app_course_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $course = new Course();
@@ -44,6 +46,7 @@ class CourseController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_course_show', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function show(Course $course): Response
     {
         return $this->render('course/show.html.twig', [
@@ -52,6 +55,7 @@ class CourseController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_course_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, Course $course, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CourseType::class, $course);
@@ -70,6 +74,7 @@ class CourseController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_course_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, Course $course, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$course->getId(), $request->request->get('_token'))) {

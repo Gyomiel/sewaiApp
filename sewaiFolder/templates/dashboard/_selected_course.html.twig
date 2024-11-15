@@ -18,12 +18,13 @@
 			</div>
 
 			<div class="lessons-list">
+				<div class="w-96 text-lg font-medium text-gray-900 rounded-[20px] overflow-hidden">
+					<a href="#" class="block px-4 py-2 text-white bg-blue-900 border-b border-gray-200 cursor-pointer text-2xl font-semibold">Course content</a>
 				{% for lesson in selectedCourse.lessons %}
-					<a href="javascript:void(0);" class="lesson-link" data-lesson-id="{{ lesson.id }}">
-						<h2>{{ lesson.lessonNumber }}.
-							{{ lesson.title }}</h2>
+					<a href="javascript:void(0);" class="lesson-link block px-4 py-2 text-white bg-blue-700 border-b border-gray-200 cursor-pointer last:rounded-b-[20px] hover:bg-blue-80 font-medium" data-lesson-id="{{ lesson.id }}">{{ lesson.lessonNumber }}: {{ lesson.title }}
 					</a>
 				{% endfor %}
+				</div>
 			</div>
 		</div>
 	{% endif %}

@@ -2,6 +2,9 @@
 	<h2 class="text-center">{{ selectedLesson.lessonNumber }}.
 		{{ selectedLesson.title }}</h2>
 	<p>{{ selectedLesson.content }}</p>
+	{% for question in questions %}
+	<div>{{ questions.title }}</div>
+	{% endfor %}
 
 	<a href="{{ path('dashboard', {'course_id': selectedLesson.course.id}) }}" class="btn btn-secondary">Back to Lessons</a>
 </div>

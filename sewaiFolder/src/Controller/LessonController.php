@@ -10,11 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/lesson')]
 class LessonController extends AbstractController
 {
     #[Route('/', name: 'app_lesson_index', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(LessonRepository $lessonRepository): Response
     {
         return $this->render('lesson/index.html.twig', [
@@ -23,6 +25,7 @@ class LessonController extends AbstractController
     }
 
     #[Route('/new', name: 'app_lesson_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $lesson = new Lesson();
@@ -43,6 +46,7 @@ class LessonController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_lesson_show', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function show(Lesson $lesson): Response
     {
         return $this->render('lesson/show.html.twig', [
@@ -51,6 +55,7 @@ class LessonController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_lesson_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, Lesson $lesson, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(LessonType::class, $lesson);
@@ -69,6 +74,7 @@ class LessonController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_lesson_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, Lesson $lesson, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$lesson->getId(), $request->request->get('_token'))) {

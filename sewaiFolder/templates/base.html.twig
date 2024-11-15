@@ -7,7 +7,7 @@
 			{% endblock %}
 		</title>
 		<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		<link rel="icon" href="/imgs/sewaiFavicon.png" type="image/png">
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
 			<link rel="stylesheet" href="{{ asset('styles/app.css') }}">
@@ -21,7 +21,7 @@
 	<body class="flex flex-col min-h-screen">
 		{% block header %}
 			{% if not app.user %}
-				<nav class="bg-green-500 border-gray-200 dark:bg-gray-900">
+				<nav class="bg-green-500 border-gray-200">
 					<div class="bg-green-500 flex items-center justify-between p-4">
 						<a href="{{ path('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
 							<img src="{{ asset('imgs/sewaiLogoBlack.png') }}" class="h-8"/>
