@@ -39,10 +39,10 @@ class AnswerController extends AbstractController
                     return new JsonResponse(['error' => 'No answer provided'], 400);
                 }
 
-                $prompt = "You are an expert in mental health issues. This is the question: '{$question->getTitle()}' and this is the answer: '{$answer}'. I don't want you to ask any questions, just give tips and feedback about the users' feelings and answers to these questions. Don't make them feel judged ever. Don't mention the question either. No more than 300 tokens.";
+                $prompt = "You are an expert in mental health issues. This is the question: '{$question->getTitle()}' and this is the answer: '{$answer}'. Focus on offering empathetic tips and feedback about the emotions and themes expressed. Do not ask any questions, and ensure the response is supportive and free of judgment. Avoid referencing the question or answer directly. Keep the response concise, within 300 tokens.";
 
                 $payload = [
-                    'model' => 'Llama 3 8B Instruct',
+                    'model' => 'Llama 3.2 1B Instruct',
                     'messages' => [
                         ['role' => 'user', 'content' => $prompt]
                     ],

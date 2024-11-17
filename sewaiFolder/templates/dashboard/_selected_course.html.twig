@@ -1,9 +1,8 @@
 <div>
-	<h2 class="text-center">{{ selectedCourse.title }}</h2>
+	<h2 class="text-center text-2xl font-semibold">{{ selectedCourse.title }}</h2>
 
 	{% if selectedCourse %}
-		<div
-			class="courseTemplate grid">
+		<div class="courseTemplate grid">
 			<div id="course-description">
 				<p>Course description goes here for
 					{{ selectedCourse.title }}.</p>
@@ -13,17 +12,17 @@
 				{% if selectedLesson %}
 					<h2>{{ selectedLesson.title }}</h2>
 					<p>{{ selectedLesson.content }}</p>
-					<button onclick="goBackToCourse()">Back to Course</button>
 				{% endif %}
 			</div>
 
 			<div class="lessons-list">
 				<div class="w-96 text-lg font-medium text-gray-900 rounded-[20px] overflow-hidden">
 					<a href="#" class="block px-4 py-2 text-white bg-blue-900 border-b border-gray-200 cursor-pointer text-2xl font-semibold">Course content</a>
-				{% for lesson in selectedCourse.lessons %}
-					<a href="javascript:void(0);" class="lesson-link block px-4 py-2 text-white bg-blue-700 border-b border-gray-200 cursor-pointer last:rounded-b-[20px] hover:bg-blue-80 font-medium" data-lesson-id="{{ lesson.id }}">{{ lesson.lessonNumber }}: {{ lesson.title }}
-					</a>
-				{% endfor %}
+					{% for lesson in selectedCourse.lessons %}
+						<a href="javascript:void(0);" class="lesson-link block px-4 py-2 text-white bg-blue-700 border-b border-gray-200 cursor-pointer last:rounded-b-[20px] hover:bg-blue-80 font-medium" data-lesson-id="{{ lesson.id }}">{{ lesson.lessonNumber }}:
+							{{ lesson.title }}
+						</a>
+					{% endfor %}
 				</div>
 			</div>
 		</div>
@@ -37,28 +36,31 @@
 	{% endif %}
 
 	<script>
-	document.addEventListener('DOMContentLoaded', function() {
-    const lessonLinks = document.querySelectorAll('.lesson-link');
+		document.addEventListener('DOMContentLoaded', function () {
+const lessonLinks = document.querySelectorAll('.lesson-link');
 
-    lessonLinks.forEach(function(link) {
-        link.addEventListener('click', function() {
-            const lessonId = this.getAttribute('data-lesson-id');
+lessonLinks.forEach(function (link) {
+link.addEventListener('click', function () {
+const lessonId = this.getAttribute('data-lesson-id');
 
-            fetch(`/dashboard/lesson/${lessonId}`)
-                .then(response => response.text())
-                .then(data => {
-                    const lessonContent = document.getElementById('lesson-content');
-                    lessonContent.innerHTML = data;
-                    lessonContent.style.display = "block";
-                    document.getElementById("course-description").style.display = "none";
-                })
-                .catch(error => {
-                    console.error('Error fetching lesson content:', error);
-                });
-        });
-    });
+fetch(`/dashboard/lesson/${lessonId}`).then(response => response.text()).then(data => {
+const lessonContent = document.getElementById('lesson-content');
+lessonContent.innerHTML = data;
+lessonContent.style.display = "block";
+document.getElementById("course-description").style.display = "none";
+}).catch(error => {
+console.error('Error fetching lesson content:', error);
+});
+});
+});
 });
 	</script>
 
-	<a href="{{ path('dashboard') }}" class="btn btn-secondary">Back to Courses</a>
+	<a href="{{ path('dashboard') }}" class="relative inline-flex items-center justify-center p-0.5 mb-4 me-2 overflow-hidden text-lg font-semibold text-gray-900 rounded-[30px] group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200">
+		<span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-[30px] group-hover:bg-opacity-0 flex items-center">Back to Courses
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 ml-2">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/>
+			</svg>
+		</span>
+	</a>
 </div>

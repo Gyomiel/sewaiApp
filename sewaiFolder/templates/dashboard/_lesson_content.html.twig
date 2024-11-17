@@ -1,20 +1,29 @@
 <div>
-    <h2>{{lesson.lessonNumber}}. {{ lesson.title }}</h2>
-    <p>{{ lesson.content }}</p>
+	<h2>{{lesson.lessonNumber}}.
+		{{ lesson.title }}</h2>
+	<p>{{ lesson.content }}</p>
 
-    {% if lesson.questions %}
-        {% for question in lesson.questions %}
-            <p>Question time</p>
-            <h3>{{ question.title }}</h3>
-            <p>{{ question.answerType }}</p>
+	{% if lesson.questions %}
+		{% for question in lesson.questions %}
+			<p>Question time</p>
+			<h3>{{ question.title }}</h3>
+			<p>{{ question.answerType }}</p>
 
-            <form action="{{ path('aiAnswer') }}" method="POST" data-question-id="{{ question.id }}">
-                <textarea name="answer" placeholder="Type your answer here."></textarea>
-                <input type="hidden" name="question_id" value="{{ question.id }}">
-                <button type="submit">Submit answer</button>
-            </form>
-        {% endfor %}
-    {% endif %}
+			<div class="bg-white border border-slate-200 gap-2 rounded-[30px] p-2 text-sm w-[650px] flex flex-col justify-center items-center mx-auto">
+				<h1 class="text-center text-black text-2xl font-semibold p-3">What are your thoughts on this topic?</h1>
+				<form action="{{ path('aiAnswer') }}" method="POST" data-question-id="{{ question.id }}" class="w-full flex flex-col items-center">
+					<textarea name="answer" placeholder="Type your answer here." class="bg-slate-100 text-slate-600 h-28 w-[550px] placeholder:text-slate-600 placeholder:opacity-50 text-lg border border-slate-200 outline-none rounded-lg p-2 duration-300 focus:border-slate-600 mb-6"></textarea>
+					<input type="hidden" name="question_id" value="{{ question.id }}">
+					<button type="submit" class="relative inline-flex items-center justify-center p-0.5 mb-4 me-2 overflow-hidden text-lg font-semibold text-gray-900 rounded-[30px] group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200">
+						<span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-[30px] group-hover:bg-opacity-0 flex items-center">
+							Submit your answer
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 ml-2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="m15 11.25-3-3m0 0-3 3m3-3v7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+							</svg>
+						</span>
+					</button>
+				</form>
+			</div>
+		{% endfor %}
+	{% endif %}
 </div>
-
-
