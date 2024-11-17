@@ -21,24 +21,28 @@
 	<body class="flex flex-col min-h-screen">
 		{% block header %}
 			{% if not app.user %}
-				<nav class="bg-green-500 border-gray-200">
-					<div class="bg-green-500 flex items-center justify-between p-4">
-						<a href="{{ path('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-							<img src="{{ asset('imgs/sewaiLogoBlack.png') }}" class="h-8"/>
+				<nav class="bg-[#8F99FB] border-gray-200">
+					<div class="bg-[#8F99FB] flex items-center justify-between p-6">
+						<a href="{{ path('home') }}" class="ml-4 flex items-center space-x-3 rtl:space-x-reverse">
+							<img src="{{ asset('imgs/newSewaiLogo.png') }}" class="h-10"/>
 						</a>
-						<div class="bg-green-500 flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-							<button type="button" class="text-white bg-black hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-[30px] text-lg px-4 py-2 text-center" onclick="window.location.href='{{ path('login') }}'">Log in</button>
+						<div class="bg-[#8F99FB] flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+							<button type="button" class="mr-4 text-white bg-black hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-[30px] text-lg px-4 py-2 text-center" onclick="window.location.href='{{ path('login') }}'">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25"/>
+								</svg>
+							</button>
 						</div>
-						<div class="mr-6 bg-green-500 items-center justify-between hidden w-full md:flex md:w-auto md:order-1 ml-auto" id="navbar-cta">
-							<ul class="bg-green-500 flex flex-col font-semibold text-xl p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-								<li class="bg-green-500 flex items-center">
-									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+						<div class="mr-6 bg-[#8F99FB] items-center justify-between hidden w-full md:flex md:w-auto md:order-1 ml-auto" id="navbar-cta">
+							<ul class="bg-[#8F99FB] flex flex-col justify-center items-center font-semibold text-xl p-4 md:p-0 mt-4 border border-gray-100 rounded-lg rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+								<li class="bg-[#8F99FB] flex items-center">
+									<a href="#" class="bg-[#8F99FB] block pt-2 px-3 text-white hover:text-black">About</a>
 								</li>
-								<li class="bg-green-500 flex items-center">
-									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Courses</a>
+								<li class="bg-[#8F99FB] flex items-center">
+									<a href="#" class="bg-[#8F99FB] block pt-2 px-3 text-white hover:text-black">Journeys</a>
 								</li>
-								<li class="bg-green-500 flex items-center">
-									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Team</a>
+								<li class="bg-[#8F99FB] flex items-center">
+									<a href="#" class="bg-[#8F99FB] block pt-2 px-3 text-white hover:text-black">Team</a>
 								</li>
 							</ul>
 						</div>
@@ -47,28 +51,32 @@
 			{% endif %}
 
 			{% if app.user %}
-				<nav class="bg-green-500 border-gray-200 dark:bg-gray-900">
-					<div class="bg-green-500 flex items-center justify-between p-4">
-						<a href="{{ path('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-							<img src="{{ asset('imgs/sewaiLogoBlack.png') }}" class="h-8"/>
+				<nav class="bg-[#8F99FB] border-gray-200 dark:bg-gray-900">
+					<div class="bg-[#8F99FB] flex items-center justify-between p-4">
+						<a href="{{ path('home') }}" class="ml-5 flex items-center space-x-3 rtl:space-x-reverse">
+							<img src="{{ asset('imgs/newSewaiLogo.png') }}" class="h-10"/>
 						</a>
-						<div class="bg-green-500 flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-							<button type="button" class="text-white bg-black hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-[30px] text-lg px-4 py-2 text-center" onclick="window.location.href='{{ path('app_logout') }}'">Logout</button>
+						<div class="bg-[#8F99FB] flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+							<button type="button" class="mr-5 text-white bg-black hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-[30px] text-lg px-4 py-2 text-center" onclick="window.location.href='{{ path('app_logout') }}'">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/>
+								</svg>
+							</button>
 						</div>
-						<div class="mr-6 bg-green-500 items-center justify-between hidden w-full md:flex md:w-auto md:order-1 ml-auto" id="navbar-cta">
-							<ul class="bg-green-500 flex flex-col font-semibold text-xl p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-								<li class="bg-green-500 flex items-center">
-									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+						<div class="mr-6 bg-[#8F99FB] items-center justify-between hidden w-full md:flex md:w-auto md:order-1 ml-auto" id="navbar-cta">
+							<ul class="bg-[#8F99FB] flex flex-col justify-center items-center font-semibold text-xl p-4 md:p-0 mt-4 border border-gray-100 rounded-lg rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+								<li class="bg-[#8F99FB] flex items-center">
+									<a href="#" class="bg-[#8F99FB] block pt-2 px-3 text-white hover:text-black">About</a>
 								</li>
-								<li class="bg-green-500 flex items-center">
-									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Courses</a>
+								<li class="bg-[#8F99FB] flex items-center">
+									<a href="#" class="bg-[#8F99FB] block pt-2 px-3 text-white hover:text-black">Journeys</a>
 								</li>
-								<li class="bg-green-500 flex items-center">
-									<a href="#" class="bg-green-500 block py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Team</a>
+								<li class="bg-[#8F99FB] flex items-center">
+									<a href="#" class="bg-[#8F99FB] block pt-2 px-3 text-white hover:text-black">Team</a>
 								</li>
-								<li class="bg-green-500 flex items-center">
-									<a href="{{ path('dashboard') }}" class="bg-green-500 flex items-center py-2 px-3 md:p-0 text-white hover:text-black md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">
-										<img src="{{ app.user.profilePic | default('imgs/userDefaultPfp.png') }}" class="w-11 h-11 rounded-full">
+								<li class="bg-[#8F99FB] flex items-center">
+									<a href="{{ path('dashboard') }}" class="bg-[#8F99FB] flex items-center ml-4 py-2 px-3 text-white hover:text-black">
+										<img src="{{ app.user.profilePic | default('imgs/userDefaultPfp.png') }}" class="w-10 h-10 rounded-full">
 									</a>
 								</li>
 							</ul>
@@ -80,30 +88,34 @@
 
 		{% endblock %}
 		{% block body %}
-			<div class="flex flex-col flex-grow items-center text-center py-[14.3rem]">
-				<h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-black md:text-5xl lg:text-6xl">
-					Inner strength. Outer calm. Healing synergy.
-				</h1>
-				<p class="mb-6 text-[24px] font-normal text-gray-400 xl:px-48 mx-28">
-					Sewai offers self-paced, auto-learning courses designed to empower you with the tools to understand, heal, and grow. From managing anxiety and depression to practicing mindfulness and self-care, our practical lessons help you build inner strength and outer calm. Take control of your well-being—one lesson at a time.
-				</p>
-				<a href="{{ path('login') }}" class="w-40 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-[30px] group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200">
-					<span class="w-40 relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-[30px] group-hover:bg-opacity-0 text-xl font-semibold">
-						Get started
-					</span>
-				</a>
+			<div class="bgImg">
+				<div class="backdrop flex flex-col flex-grow items-center text-center py-[14.3rem] z-40">
+					<h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-black md:text-5xl lg:text-6xl z-40">
+						Inner strength. Outer calm. Healing synergy.
+					</h1>
+					<p class="mb-6 text-[24px] font-normal text-slate-700 xl:px-48 mx-28">
+						Sewai offers self-paced, auto-learning courses designed to empower you with the tools to understand, heal, and grow. From managing anxiety and depression to practicing mindfulness and self-care, our practical lessons help you build inner strength and outer calm. Take control of your well-being—one lesson at a time.
+					</p>
+
+					<a href="{{ path('login') }}" class="w-40 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-[30px] group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+						<span class="w-40 relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-[30px] group-hover:bg-opacity-0 text-xl font-semibold">
+							Get started
+						</span>
+					</a>
+				</div>
 			</div>
+
 		{% endblock %}
 
 		{% block footer %}
-			<footer class="w-full bg-lime-100 shadow col-span-2">
+			<footer class="w-full bg-[#4F558A] shadow col-span-2">
 				<div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-					<span class="text-sm text-gray-900">© 2024
+					<span class="text-sm text-slate-100">© 2024
 						<span class="font-bold">sewai</span>
 						by
 						<a href="https://github.com/Gyomiel" class="font-bold hover:underline">Gyomiel</a>. All Rights Reserved.
 					</span>
-					<ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+					<ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-slate-300 sm:mt-0">
 						<li>
 							<a href="#" class="hover:underline me-4 md:me-6">About</a>
 						</li>
@@ -119,6 +131,19 @@
 					</ul>
 				</div>
 			</footer>
+
+			<style>
+
+				.bgImg {
+					background-image: url('/imgs/fujiOpacity2.png');
+					background-repeat: no-repeat;
+					background-size: cover;
+				}
+
+				.backdrop {
+					backdrop-filter: blur(1px);
+				}
+			</style>
 
 
 		{% endblock %}
