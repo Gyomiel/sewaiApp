@@ -1,5 +1,11 @@
 <div>
-	<h2 class="text-center text-2xl font-semibold">{{ selectedCourse.title }}</h2>
+
+	<div class="relative w-full h-[136px]">
+		<p class="font-bold text-3xl text-center h-[108px] relative z-10 bg-[#1F2237] text-white py-5 leading-1">{{ selectedCourse.title }}
+			<br>
+			<span class="text-lg font-medium leading-1 text-slate-300">Remember this journey is about progress, not perfection. You got this!</span>
+		</p>
+	</div>
 
 	{% if selectedCourse %}
 		<div class="courseTemplate grid">
@@ -61,7 +67,7 @@ console.error('Error fetching lesson content:', error);
 			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2 mb-1.5">
 				<path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
 			</svg>
-			<span class="align-middle">Back to Cohorts</span>
+			<span class="align-middle">Back to Journeys</span>
 		</span>
 	</a>
 </div>
