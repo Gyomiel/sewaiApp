@@ -1,17 +1,24 @@
 <div>
-
-	<div class="relative w-full h-[136px]">
-		<p class="font-bold text-3xl text-center h-[108px] relative z-10 bg-[#1F2237] text-white py-5 leading-1">{{ selectedCourse.title }}
+	<div class="relative w-full h-[108px] bg-[#1F2237] flex items-center">
+		<a href="{{ path('dashboard') }}" class="absolute left-8 inline-flex items-center justify-center p-0.5 overflow-hidden text-lg font-semibold text-[#1F2237] rounded-[30px] group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-[30px] group-hover:bg-opacity-0 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2 mb-1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            </svg>
+            <span class="align-middle">Back</span>
+        </span>
+		</a>
+		<p class="font-bold text-3xl text-center text-white py-5 leading-1 w-full">
+			{{ selectedCourse.title }}
 			<br>
-			<span class="text-lg font-medium leading-1 text-slate-300">Remember this journey is about progress, not perfection. You got this!</span>
+			<span class="text-lg font-medium text-slate-300">Remember this journey is about progress, not perfection. You got this!</span>
 		</p>
 	</div>
 
 	{% if selectedCourse %}
 		<div class="courseTemplate grid">
 			<div id="course-description">
-				<p>Course description goes here for
-					{{ selectedCourse.title }}.</p>
+				<p>{{ selectedCourse.description }}.</p>
 			</div>
 
 			<div id="lesson-content" style="display: {% if selectedLesson %} block {% else %} none {% endif %};">
@@ -22,10 +29,10 @@
 			</div>
 
 			<div class="lessons-list">
-				<div class="w-96 text-lg font-medium text-gray-900 rounded-[20px] overflow-hidden">
-					<a href="#" class="block px-4 py-2 text-white bg-blue-900 border-b border-gray-200 cursor-pointer text-2xl font-semibold">Course content</a>
+				<div class="w-96 text-lg font-medium text-gray-900">
+					<a href="#" class="block px-4 py-2 text-white bg-blue-900 border-b border-gray-200 cursor-pointer text-2xl font-semibold">Journey Stops</a>
 					{% for lesson in selectedCourse.lessons %}
-						<a href="javascript:void(0);" class="lesson-link block px-4 py-2 text-white bg-blue-700 border-b border-gray-200 cursor-pointer last:rounded-b-[20px] hover:bg-blue-80 font-medium" data-lesson-id="{{ lesson.id }}">{{ lesson.lessonNumber }}:
+						<a href="javascript:void(0);" class="lesson-link block px-4 py-2 text-white bg-blue-700 border-b border-gray-200 cursor-pointer hover:bg-blue-80 font-medium" data-lesson-id="{{ lesson.id }}">{{ lesson.lessonNumber }}:
 							{{ lesson.title }}
 						</a>
 					{% endfor %}
@@ -62,12 +69,4 @@ console.error('Error fetching lesson content:', error);
 });
 	</script>
 
-	<a href="{{ path('dashboard') }}" class="relative inline-flex items-center justify-center p-0.5 mb-4 overflow-hidden text-lg font-semibold text-gray-900 rounded-[30px] group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200">
-		<span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-[30px] group-hover:bg-opacity-0 flex items-center">
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2 mb-1.5">
-				<path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-			</svg>
-			<span class="align-middle">Back to Journeys</span>
-		</span>
-	</a>
 </div>

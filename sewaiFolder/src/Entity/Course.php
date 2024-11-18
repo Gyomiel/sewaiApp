@@ -40,6 +40,9 @@ class Course
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Lesson::class)]
     private Collection $lessons;
 
+    #[ORM\Column(length: 50)]
+    private ?string $shortDesc = null;
+
     public function __construct()
     {
         $this->userTrackings = new ArrayCollection();
@@ -169,6 +172,18 @@ class Course
                 $lesson->setCourse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getShortDesc(): ?string
+    {
+        return $this->shortDesc;
+    }
+
+    public function setShortDesc(string $shortDesc): static
+    {
+        $this->shortDesc = $shortDesc;
 
         return $this;
     }

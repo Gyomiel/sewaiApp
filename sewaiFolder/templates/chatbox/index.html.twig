@@ -146,59 +146,7 @@
 		</form>
 
 
-    <script>
-        const chatBox = document.getElementById('chat-box');
-        const form = document.getElementById('chat-form');
-        const messageInput = document.getElementById('message');
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
 
-            const userMessage = messageInput.value.trim();
-            if (userMessage === '') return;
-
-            chatBox.innerHTML += `<div class="chat-message user"><p>${userMessage}</p></div>`;
-
-            messageInput.value = '';
-			const payload = {
-				model: "Llama 3 8B Instruct",
-				messages: [
-					{
-						role: "system",
-						content: "You are a helpful assistant."
-					},
-					{
-						role: "user",
-						content: "Hello, how are you?"
-					}
-				],
-				max_tokens: 150,
-				temperature: 0.7
-			};
-            try {
-                const response = await fetch('http://127.0.0.1:4891/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-						'Access-Control-Allow-Origin': '*',
-                        'Content-Type': 'application/json'
-                    },
-					body: JSON.stringify(payload)
-                });
-
-                const data = await response.json();
-				console.log(data);
-
-                if (data.error) {
-                    chatBox.innerHTML += `<div class="chat-message ai"><p>Error: ${data.error}</p></div>`;
-                } else {
-                    chatBox.innerHTML += `<div class="chat-message ai"><p>${data.response}</p></div>`;
-                }
-
-                chatBox.scrollTop = chatBox.scrollHeight;
-            } catch (error) {
-                chatBox.innerHTML += `<div class="chat-message ai"><p>Error: ${error.message}</p></div>`;
-            }
-        });
-    </script>
 
 {% endblock %}
 

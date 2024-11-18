@@ -42,21 +42,18 @@ class AnswerController extends AbstractController
                 $prompt = "You are an expert in mental health issues. This is the question: '{$question->getTitle()}' and this is the answer: '{$answer}'. Focus on offering empathetic tips and feedback about the emotions and themes expressed. Do not ask any questions, and ensure the response is supportive and free of judgment. Avoid referencing the question or answer directly. Keep the response concise, within 300 tokens.";
 
                 $payload = [
-                    'model' => 'Llama 3 8B Instruct',
-                    'messages' => [
-                        ['role' => 'user', 'content' => $prompt]
-                    ],
-                    'max_tokens' => 300,
-                    'temperature' => 0.28
+                    'model' => 'llama3.2',
+                    'prompt' => $prompt,
+                    'stream' => false
                 ];
 
-                $response = $this->httpClient->request('POST', 'http://localhost:4891/v1/chat/completions', [
+                $response = $this->httpClient->request('POST', 'http://localhost:11434/api/generate', [
                     'json' => $payload,
                 ]);
 
                 $statusCode = $response->getStatusCode();
                 $content = $response->toArray();
-                return $this->render('answer/index.html.twig', ['response'=> $content['choices'][0]['message']['content']]);
+                return $this->render('answer/index.html.twig', ['response'=> $content['response']]);
 
                // return new JsonResponse($content, $statusCode);
 

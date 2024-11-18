@@ -36,27 +36,24 @@ class ChatboxController extends AbstractController
                 $content = $request->getContent();
                 $data = json_decode($content, true);
 
-                if (!isset($data['message']) || empty($data['message'])) {
+                if (!$request->get('message')) {
                     return new JsonResponse(['error' => 'No message provided'], 400);
                 }
 
-                $userMessage = $data['message'];
+                $userMessage = $request->get('message');
                 $messages[] = ['role' => 'user', 'content' => $userMessage];
 
                 $payload = [
-                    'model' => 'Llama 3 8B Instruct',
-                    'messages' => array_merge(
-                        [['role' => 'system', 'content' => "You are a helpful assistant."]],
-                        $messages,
-                        [['role' => 'user', 'content' => $userMessage]]
-                    ),
+                    'model' => 'llama3.2',
+                    'prompt' => $userMessage,
                     'max_tokens' => 300,
                     'temperature' => 0.5,
+                    'stream' => false
                 ];
 
                 $this->logger->info('Sending Payload to AI API: ' . json_encode($payload));
 
-                $response = $this->httpClient->request('POST', 'http://localhost:4891/v1/chat/completions', [
+                $response = $this->httpClient->request('POST', 'http://localhost:11434/api/generate/', [
                     'json' => $payload,
                 ]);
 
