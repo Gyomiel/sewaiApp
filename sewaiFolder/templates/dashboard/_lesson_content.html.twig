@@ -15,7 +15,7 @@
 		{% for question in lesson.questions %}
 			<div class="bg-white gap-2 rounded-[30px] p-2 text-sm w-[1000px] flex flex-col justify-center items-center mx-auto">
 				<h1 class="text-center text-[#1F2237] text-2xl font-semibold p-3">{{ question.title }}</h1>
-				<form action="{{ path('aiAnswer') }}" method="POST" data-question-id="{{ question.id }}" class="w-full flex flex-col items-center">
+				<form action="{{ path('aiAnswer') }}" method="POST" data-question-id="{{ question.id }}" data-course-id="{{ lesson.course.id }}" class="w-full flex flex-col items-center">
 					<textarea name="answer" placeholder="Type your answer here." class="peer min-h-[20px] w-[800px] resize-none border-b border-blue-gray-200 bg-transparent pt-4 text-lg font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50 mb-10"></textarea>
 					<input type="hidden" name="question_id" value="{{ question.id }}">
 					<button type="submit" class="relative inline-flex items-center justify-center p-0.5 mb-4 me-2 overflow-hidden text-lg font-semibold text-gray-900 rounded-[30px] group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">

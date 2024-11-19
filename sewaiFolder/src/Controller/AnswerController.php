@@ -36,6 +36,7 @@ class AnswerController extends AbstractController
                 $answer = $request->get('answer');
                 $questionId = $request->get('question_id');
                 $question = $this->questionRepository->find($questionId);
+                $courseId = $request->get('course_id');
 
                 if (!$question) {
                     return new JsonResponse(['message' => 'Question not found'], 404);
@@ -48,7 +49,7 @@ class AnswerController extends AbstractController
                 $prompt = "You are an expert in mental health issues. This is the question: '{$question->getTitle()}' and this is the answer: '{$answer}'. Focus on offering empathetic tips and feedback about the emotions and themes expressed. Do not ask any questions, and ensure the response is supportive and free of judgment. Avoid referencing the question or answer directly. Keep the response concise, within 300 tokens.";
 
                 $payload = [
-                    'model' => 'llama3.2:1b',
+                    'model' => 'llama3.2',
                     'prompt' => $prompt,
                     'stream' => false
                 ];
