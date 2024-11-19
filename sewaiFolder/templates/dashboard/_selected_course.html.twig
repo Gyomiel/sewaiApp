@@ -1,24 +1,51 @@
 <div>
 	<div class="relative w-full h-[108px] bg-[#1F2237] flex items-center">
 		<a href="{{ path('dashboard') }}" class="absolute left-8 inline-flex items-center justify-center p-0.5 overflow-hidden text-lg font-semibold text-[#1F2237] rounded-[30px] group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-[30px] group-hover:bg-opacity-0 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2 mb-1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-            </svg>
-            <span class="align-middle">Back</span>
-        </span>
+			<span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-[30px] group-hover:bg-opacity-0 flex items-center">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2 mb-1.5">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+				</svg>
+				<span class="align-middle">Back</span>
+			</span>
 		</a>
 		<p class="font-bold text-3xl text-center text-white py-5 leading-1 w-full">
 			{{ selectedCourse.title }}
 			<br>
-			<span class="text-lg font-medium text-slate-300">Remember this journey is about progress, not perfection. You got this!</span>
+			{% if selectedCourse.title == 'Anxiety Management' %}
+				<span class="text-lg font-medium text-slate-300">Remember this journey is about progress, not perfection. You got this!</span>
+			{% elseif selectedCourse.title == 'Depression Coping' %}
+				<span class="text-lg font-medium text-slate-300">Take it one step at a time. Small actions can lead to big changes. Keep moving forward.</span>
+			{% elseif selectedCourse.title == 'Stress Relief' %}
+				<span class="text-lg font-medium text-slate-300">Breathe deeply and allow yourself a moment of calm. You deserve it!</span>
+			{% elseif selectedCourse.title == 'Confidence Building' %}
+				<span class="text-lg font-medium text-slate-300">Believe in your strengths and keep challenging yourself. You've got the power!</span>
+			{% elseif selectedCourse.title == 'Relationship Health' %}
+				<span class="text-lg font-medium text-slate-300">Healthy relationships start with understanding and communication. You're on the right path!</span>
+			{% elseif selectedCourse.title == 'Trauma Recovery' %}
+				<span class="text-lg font-medium text-slate-300">Healing takes time. Be gentle with yourself and embrace each step of recovery.</span>
+			{% endif %}
 		</p>
 	</div>
 
 	{% if selectedCourse %}
-		<div class="courseTemplate grid">
-			<div id="course-description">
-				<p>{{ selectedCourse.description }}.</p>
+		<div class="courseTemplate">
+			<div id="course-description" class="flex flex-col justify-center items-center">
+				<div class="service-card mx-6 shadow-xl snap-start shrink-0 py-10 px-8 bg-[#1F2237] flex flex-col items-start gap-4 transition-all duration-300 group rounded-[30px]">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="#000000" class="text-6xl h-14 w-14 stroke-slate-300">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z"/>
+					</svg>
+
+					<p class="font-bold text-3xl text-white">
+						Journey Goals
+					</p>
+					<p class="text-slate-300 text-xl">
+						{{ selectedCourse.description }}
+					</p>
+					<p style="-webkit-text-stroke: 2px white; -webkit-text-fill-color: transparent;" class="text-6xl font-bold self-end">
+						{{ selectedCourse.category }}
+					</p>
+				</div>
+
 			</div>
 
 			<div id="lesson-content" style="display: {% if selectedLesson %} block {% else %} none {% endif %};">
@@ -28,11 +55,17 @@
 				{% endif %}
 			</div>
 
-			<div class="lessons-list">
+			<div class="w-96 h-[639px] lessons-list">
 				<div class="w-96 text-lg font-medium text-gray-900">
-					<a href="#" class="block px-4 py-2 text-white bg-blue-900 border-b border-gray-200 cursor-pointer text-2xl font-semibold">Journey Stops</a>
+					<a href="#" class="block px-4 py-2 text-white bg-[#3F446F] border-b border-white text-2xl font-semibold flex items-center">
+						Journey Stops
+						<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="w-5 h-5 ml-2">
+							<path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd"/>
+						</svg>
+					</a>
+
 					{% for lesson in selectedCourse.lessons %}
-						<a href="javascript:void(0);" class="lesson-link block px-4 py-2 text-white bg-blue-700 border-b border-gray-200 cursor-pointer hover:bg-blue-80 font-medium" data-lesson-id="{{ lesson.id }}">{{ lesson.lessonNumber }}:
+						<a href="javascript:void(0);" class="lesson-link block px-4 py-2 text-[#1F2237] bg-[#E5E8FD] border-b border-white cursor-pointer hover:bg-[#8E99F9] hover:text-white font-medium" data-lesson-id="{{ lesson.id }}">{{ lesson.lessonNumber }}:
 							{{ lesson.title }}
 						</a>
 					{% endfor %}
@@ -68,5 +101,4 @@ console.error('Error fetching lesson content:', error);
 });
 });
 	</script>
-
 </div>

@@ -11,6 +11,9 @@ use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use App\Repository\QuestionRepository;
+use App\Repository\CourseRepository;
+use App\Repository\LessonRepository;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class AnswerController extends AbstractController
 {
@@ -22,9 +25,12 @@ class AnswerController extends AbstractController
         $this->questionRepository = $questionRepository;
     }
 
+    
     #[Route('/answer', name: 'aiAnswer', methods: ['GET', 'POST'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function getFeedback(Request $request)
     {
+
         if ($request->isMethod('POST')) {
             try {
                 $answer = $request->get('answer');
@@ -42,7 +48,7 @@ class AnswerController extends AbstractController
                 $prompt = "You are an expert in mental health issues. This is the question: '{$question->getTitle()}' and this is the answer: '{$answer}'. Focus on offering empathetic tips and feedback about the emotions and themes expressed. Do not ask any questions, and ensure the response is supportive and free of judgment. Avoid referencing the question or answer directly. Keep the response concise, within 300 tokens.";
 
                 $payload = [
-                    'model' => 'llama3.2',
+                    'model' => 'llama3.2:1b',
                     'prompt' => $prompt,
                     'stream' => false
                 ];
