@@ -73,7 +73,7 @@ class ChatboxController extends AbstractController
 
                 $this->logger->info('AI Response: ' . json_encode($content));
 
-                if (!isset($content['choices']) || empty($content['choices']) || !isset($content['choices'][0]['message']['content'])) {
+                if (!isset($content['response']) || empty($content['response']) || !isset($content['response'])) {
                     $this->logger->error('Invalid response from external API', [
                         'response' => $content
                     ]);
@@ -84,7 +84,7 @@ class ChatboxController extends AbstractController
                     ], 500);
                 }
 
-                $aiResponse = $content['choices'][0]['message']['content'];
+                $aiResponse = $content['response'];
                 $messages[] = ['role' => 'ai', 'content' => $aiResponse];
 
                 $request->getSession()->set('chat_messages', $messages);
