@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\CourseRepository;
 use App\Repository\LessonRepository;
 use App\Repository\QuestionRepository;
+use App\Repository\UserTrackingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,6 +42,7 @@ class SecurityController extends AbstractController
         CourseRepository $courseRepository,
         LessonRepository $lessonRepository,
         QuestionRepository $questionRepository,
+        UserTrackingRepository $userTrackingRepository
     ): Response
     {
 
@@ -48,6 +50,8 @@ class SecurityController extends AbstractController
         $lessons = $lessonRepository->findAll();
         $user = $this->getUser();
     
+        $userJourneys = $userTrackingRepository->findbyUser($user);
+
         $courseId = $request->get('course_id');
         $lessonId = $request->get('lesson_id');
 
@@ -75,6 +79,7 @@ class SecurityController extends AbstractController
             'lessons' => $lessons,
             'selectedLesson' => $lesson,
             'questions' => $questions,
+            'userJourneys' => $userJourneys
         ]);
     }
     

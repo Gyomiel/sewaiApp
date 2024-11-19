@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\UserTracking;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,6 +20,16 @@ class UserTrackingRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, UserTracking::class);
+    }
+
+    public function findByUser(User $user)
+    {
+        return $this->createQueryBuilder('ut')
+        ->join('ut.users', 'u')
+        ->where('u.id = :user')
+        ->setParameter('user', $user->getId())
+        ->getQuery()
+        ->getResult();
     }
 
 //    /**

@@ -17,7 +17,7 @@ class UserTracking
     private ?int $id = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'userTrackings')]
-    private Collection $user_id;
+    private Collection $users;
 
     #[ORM\ManyToMany(targetEntity: Course::class, inversedBy: 'userTrackings')]
     private Collection $course_id;
@@ -39,7 +39,7 @@ class UserTracking
 
     public function __construct()
     {
-        $this->user_id = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->course_id = new ArrayCollection();
         $this->lession_id = new ArrayCollection();
     }
@@ -52,23 +52,23 @@ class UserTracking
     /**
      * @return Collection<int, User>
      */
-    public function getUserId(): Collection
+    public function getUsers(): Collection
     {
-        return $this->user_id;
+        return $this->users;
     }
 
-    public function addUserId(User $userId): static
+    public function addUser(User $user): self
     {
-        if (!$this->user_id->contains($userId)) {
-            $this->user_id->add($userId);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
         }
 
         return $this;
     }
 
-    public function removeUserId(User $userId): static
+    public function removeUser(User $user): static
     {
-        $this->user_id->removeElement($userId);
+        $this->users->removeElement($user);
 
         return $this;
     }

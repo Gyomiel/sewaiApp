@@ -44,7 +44,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?int $streakCount = null;
 
-    #[ORM\ManyToMany(targetEntity: UserTracking::class, mappedBy: 'user_id')]
+    #[ORM\ManyToMany(targetEntity: UserTracking::class, mappedBy: 'users')]
     private Collection $userTrackings;
 
     public function __construct()

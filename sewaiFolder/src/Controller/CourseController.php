@@ -3,14 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Course;
+use App\Entity\UserTracking;
 use App\Form\CourseType;
 use App\Repository\CourseRepository;
+use App\Repository\UserTrackingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route('/course')]
 class CourseController extends AbstractController
@@ -22,6 +27,40 @@ class CourseController extends AbstractController
         return $this->render('course/index.html.twig', [
             'courses' => $courseRepository->findAll(),
         ]);
+    }
+
+    #[Route('/select-journey/{id}', name: 'selectJourney', methods: ['GET', 'POST'])]
+    #[IsGranted('IS_FULLY_AUTHENTICATED')]
+    public function selectJourney($id, ManagerRegistry $doctrine)
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        $course = $doctrine->getRepository(Course::class)->find($id);
+
+        if (!$course) {
+            throw $this->createNotFoundException('Journey not found.');
+        }
+
+        $trackingOnDB = $userTrackingRepository->findOneBy(['user' => $user, 'course' => $course]);
+        
+        if ($trackingOnDB) {
+            $this->addFlash('info', 'You are already enrolled in this journey!');
+            return $this->redirectToRoute('dashboard');
+        }
+
+        $userTracking = new UserTracking();
+        $userTracking->addUser($user);
+        $userTracking->addCourse($course);
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->persist($userTracking);
+        $entityManager->flush();
+
+        return $this ->redirectToRoute('/');
     }
 
     #[Route('/new', name: 'app_course_new', methods: ['GET', 'POST'])]
