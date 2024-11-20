@@ -3,10 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Course;
-use App\Entity\UserTracking;
+use App\Entity\User;
 use App\Form\CourseType;
 use App\Repository\CourseRepository;
-use App\Repository\UserTrackingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,9 +28,9 @@ class CourseController extends AbstractController
         ]);
     }
 
-    #[Route('/select-journey/{id}', name: 'selectJourney', methods: ['GET', 'POST'])]
-    #[IsGranted('IS_FULLY_AUTHENTICATED')]
-    public function selectJourney($id, ManagerRegistry $doctrine)
+    #[Route('/select-journey/{courseId}', name: 'selectJourney', methods: ['GET', 'POST'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function selectJourney($courseId, ManagerRegistry $doctrine, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
 
@@ -39,28 +38,38 @@ class CourseController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        $course = $doctrine->getRepository(Course::class)->find($id);
+        $course = $doctrine->getRepository(Course::class)->find($courseId);
 
         if (!$course) {
             throw $this->createNotFoundException('Journey not found.');
         }
 
-        $trackingOnDB = $userTrackingRepository->findOneBy(['user' => $user, 'course' => $course]);
-        
-        if ($trackingOnDB) {
-            $this->addFlash('info', 'You are already enrolled in this journey!');
+        if ($course->getUser() === $user) {
             return $this->redirectToRoute('dashboard');
         }
 
-        $userTracking = new UserTracking();
-        $userTracking->addUser($user);
-        $userTracking->addCourse($course);
-
-        $entityManager = $doctrine->getManager();
-        $entityManager->persist($userTracking);
+        $user->addCourse($course);
+        $entityManager->persist($user);
         $entityManager->flush();
 
-        return $this ->redirectToRoute('/');
+        return $this->redirectToRoute('dashboard');
+    }
+
+    #[Route('/journeys', name: 'viewJourneys', methods: ['GET'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function viewJourney(ManagerRegistry $doctrine): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        $courses = $user->getCourse();
+
+        return $this->render('course/viewJourney.html.twig', [
+            'courses' => $courses,
+        ]);
     }
 
     #[Route('/new', name: 'app_course_new', methods: ['GET', 'POST'])]

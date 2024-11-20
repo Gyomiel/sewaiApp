@@ -43,6 +43,9 @@ class Course
     #[ORM\Column(length: 50)]
     private ?string $shortDesc = null;
 
+    #[ORM\ManyToOne(inversedBy: 'course')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->userTrackings = new ArrayCollection();
@@ -184,6 +187,18 @@ class Course
     public function setShortDesc(string $shortDesc): static
     {
         $this->shortDesc = $shortDesc;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

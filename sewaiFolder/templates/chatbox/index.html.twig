@@ -94,17 +94,79 @@
 		{% endblock %}
 
 		{% block test %}
+		<div class="flex flex-col justify-center items-center">
+			<div class="w-[800px] mx-auto bg-white dark:bg-zinc-800 shadow-md rounded-lg">
+				<div class="flex flex-col h-[400px]">
+					<div class="px-4 py-3 border-b dark:border-zinc-700">
+						<div class="flex justify-between items-center">
+							<h2 class="text-lg font-semibold text-zinc-800">
+								Chatbot Assistant
+							</h2>
+							<div class="bg-green-500 text-black text-xs px-2 py-1 rounded-full">
+								Online
+							</div>
+						</div>
+					</div>
+					<div class="flex-1 p-3 overflow-y-auto flex flex-col space-y-2" id="chatDisplay">
+						{% for message in messages %}
+							<div class="chat-message {{ message.role == 'user' ? 'self-start bg-zinc-500' : 'self-end bg-blue-500' }} text-black max-w-xs rounded-lg px-3 py-1.5 text-sm">
+								<p>{{ message.content }}</p>
+							</div>
+						{% endfor %}
+					</div>
+					<div class="px-3 py-2 border-t dark:border-zinc-700">
+						<div class="flex gap-2">
+							<form id="chat-form" method="POST" class="flex-1">
+								<input
+										type="text"
+										id="message"
+										name="message"
+										placeholder="Type your message..."
+										required
+										class="p-2 border rounded-lg dark:bg-zinc-700 dark:text-white dark:border-zinc-600 text-sm"
+								/>
+								<button
+										type="submit"
+										class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-3 rounded-lg transition duration-300 ease-in-out text-sm"
+								>
+									Send
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+			{#<div class="flex flex-col justify-center items-center">
+				<div id="chat-box" class="chat-container">
+					{% for message in messages %}
+						<div class="chat-message {{ message.role }}">
+							<p>{{ message.content }}</p>
+						</div>
+					{% endfor %}
+
+					<form id="chat-form" method="POST">
+						<label for="message">Your Message:</label>
+						<input type="text" id="message" name="message" required>
+						<input type="hidden" name="_method" value="POST">
+						<button type="submit">Send</button>
+					</form>
+				</div>
+			</div>
+
 
 			<style>
 				.chat-container {
-					width: 500px;
-					margin: 0 auto;
-					border: 1px solid #ccc;
-					padding: 20px;
-					border-radius: 8px;
-					background-color: #f9f9f9;
-					max-height: 400px;
-					overflow-y: auto;
+					background-color: lightslategray;
+					border-radius: 30px;
+					padding: 15px;
+					margin: 20px;
+					display: flex;
+					flex-direction: column;
+					width: 850px;
 				}
 				.chat-message {
 					margin: 10px 0;
@@ -124,25 +186,7 @@
 					border-radius: 4px;
 					margin-top: 10px;
 				}
-			</style>
-
-			<h1>AI Chat</h1>
-
-			<div id="chat-box" class="chat-container">
-				{% for message in messages %}
-					<div class="chat-message {{ message.role }}">
-						<p>{{ message.content }}</p>
-					</div>
-				{% endfor %}
-			</div>
-
-			<form id="chat-form" method="POST">
-				<label for="message">Your Message:</label>
-				<input type="text" id="message" name="message" required>
-				<input type="hidden" name="_method" value="POST">
-				<button type="submit">Send</button>
-			</form>
-
+			</style>#}
 
 		{% endblock %}
 

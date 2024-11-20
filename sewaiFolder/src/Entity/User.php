@@ -47,10 +47,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: UserTracking::class, mappedBy: 'users')]
     private Collection $userTrackings;
 
+    #[ORM\OneToMany(targetEntity: Course::class, mappedBy: 'user')]
+    private Collection $course;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->userTrackings = new ArrayCollection();
+        $this->course = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -217,6 +221,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->userTrackings->removeElement($userTracking)) {
             $userTracking->removeUserId($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Course>
+     */
+    public function getCourse(): Collection
+    {
+        return $this->course;
+    }
+
+    public function addCourse(Course $course): static
+    {
+        if (!$this->course->contains($course)) {
+            $this->course->add($course);
+            $course->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCourse(Course $course): static
+    {
+        if ($this->course->removeElement($course)) {
+            // set the owning side to null (unless already changed)
+            if ($course->getUser() === $this) {
+                $course->setUser(null);
+            }
         }
 
         return $this;

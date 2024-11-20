@@ -57,18 +57,18 @@ class UserTracking
         return $this->users;
     }
 
-    public function addUser(User $user): self
+    public function addUsers(User $users): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
+        if (!$this->users->contains($users)) {
+            $this->users->add($users);
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): static
+    public function removeUser(User $users): static
     {
-        $this->users->removeElement($user);
+        $this->users->removeElement($users);
 
         return $this;
     }
