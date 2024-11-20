@@ -53,6 +53,7 @@
 					<h2>{{ selectedLesson.title }}</h2>
 					<p>{{ selectedLesson.content }}</p>
 				{% endif %}
+
 			</div>
 
 			<div class="w-96 h-[639px] lessons-list">
@@ -65,30 +66,63 @@
 					</a>
 
 					{% for lesson in selectedCourse.lessons %}
-						<a href="javascript:void(0);" class="lesson-link block px-4 py-2  mt-[1px] bg-[#E5E8FD] border-b border-white cursor-pointer hover:bg-[#8E99F9] hover:text-white font-medium" data-lesson-id="{{ lesson.id }}">{{ lesson.lessonNumber }}:
+						<a href="javascript:void(0);" class="lesson-link flex px-4 py-2 mt-[1px] bg-[#E5E8FD] border-b border-white cursor-pointer hover:bg-[#8E99F9] hover:text-white font-medium" data-lesson-id="{{ lesson.id }}">
+							{{ lesson.lessonNumber }}:
 							{{ lesson.title }}
 						</a>
 					{% endfor %}
 				</div>
 			</div>
+			<button id="next" class="cursor-pointer duration-200 hover:scale-125 active:scale-100">
+				<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="#6E77C2" class="size-6">
+					<path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+				</svg>
+			</button>
 		</div>
 	{% endif %}
-
 	{% if selectedLesson %}
 		<div>
 			<h2>Lesson title:
 				{{ selectedLesson.title }}</h2>
 		</div>
 	{% endif %}
+	<style>
+		.isActive {
+			background-color: #6E77C2;
+			color: white;
+		}
 
+		#next {
+			position: absolute;
+			right: 430px;
+			bottom: 85px;
+		}
+	</style>
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
 const lessonLinks = document.querySelectorAll('.lesson-link');
+const nextButton = document.getElementById("next");
+nextButton.style.display = "none"
 
-lessonLinks.forEach(function (link) {
-link.addEventListener('click', function () {
-const lessonId = this.getAttribute('data-lesson-id');
+let activeLinkIndex = -1;
 
+const updateActiveLink = (newIndex) => {
+lessonLinks[activeLinkIndex] ?. classList.remove("isActive");
+activeLinkIndex = newIndex;
+lessonLinks[activeLinkIndex] ?. classList.add("isActive");
+if (activeLinkIndex !== -1) 
+nextButton.style.display = "block"
+
+
+
+
+
+};
+
+const loadLessonContent = (e, index) => {
+updateActiveLink(index);
+
+const lessonId = e.getAttribute('data-lesson-id');
 fetch(`/dashboard/lesson/${lessonId}`).then(response => response.text()).then(data => {
 const lessonContent = document.getElementById('lesson-content');
 lessonContent.innerHTML = data;
@@ -97,7 +131,31 @@ document.getElementById("course-description").style.display = "none";
 }).catch(error => {
 console.error('Error fetching lesson content:', error);
 });
+};
+
+lessonLinks.forEach((link, index) => {
+link.addEventListener('click', (e) => {
+loadLessonContent(e.target, index)
 });
+});
+
+nextButton.addEventListener("click", () => {
+if (activeLinkIndex < lessonLinks.length - 1) {
+loadLessonContent(lessonLinks[activeLinkIndex + 1], activeLinkIndex + 1)
+lessonLinks[activeLinkIndex - 1].setAttribute("completed", true)
+const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+svg.setAttribute("viewBox", "0 0 24 24");
+svg.setAttribute("fill", "currentColor");
+svg.setAttribute("class", "w-5 h-5 ml-2 mt-1");
+
+const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+path.setAttribute("fill-rule", "evenodd");
+path.setAttribute("d", "M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z");
+path.setAttribute("clip-rule", "evenodd");
+svg.appendChild(path);
+lessonLinks[activeLinkIndex - 1].appendChild(svg);
+}
 });
 });
 	</script>
