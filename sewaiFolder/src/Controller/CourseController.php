@@ -45,14 +45,14 @@ class CourseController extends AbstractController
         }
 
         if ($course->getUser() === $user) {
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('viewJourneys');
         }
 
         $user->addCourse($course);
         $entityManager->persist($user);
         $entityManager->flush();
 
-        return $this->redirectToRoute('dashboard');
+        return $this->redirectToRoute('viewJourneys');
     }
 
     #[Route('/journeys', name: 'viewJourneys', methods: ['GET'])]
@@ -65,7 +65,7 @@ class CourseController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        $courses = $user->getCourse();
+        $courses = $user->getCourse()?->toArray();
 
         return $this->render('course/viewJourney.html.twig', [
             'courses' => $courses,

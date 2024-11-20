@@ -84,95 +84,25 @@
             </div>
 
         {% endblock %}
+        <div>
 
-        <div class="flex items-center justify-center h-[750px]">
-            <div class="w-[500px] bg-slate-300 rounded-[30px] py-10">
-                {{ form_start(form) }}
+            <div class="relative w-full h-[136px]">
+                <p class="font-bold text-3xl text-center h-[108px] relative z-10 bg-[#1F2237] text-white py-5 leading-1">Your Journey, Your Way
+                    <br>
+                    <span class="text-lg font-medium leading-1 text-slate-300">Choose as many paths as you want—take it at your own pace!</span>
+                </p>
+            </div>
 
-                <h2 class="text-center text-4xl font-semibold mb-7">Edit your profile</h2>
+            <div class="grid grid-cols-3 grid-rows-[1fr 1fr] w-[100%] h-[80%] place-items-center">
+                {% import '_macros/courses.html.twig' as courses %}
 
-                <div class="w-[500px] bg-slate-300 rounded-[30px]">
-                    <div class="form-group mx-14 mb-6 relative">
-                        <div class="absolute inset-y-0 left-0 w-[45px] flex items-center pointer-events-none bg-black rounded-l-[30px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="#FFFFFF" class="ml-[12px] h-6 w-6">
-                                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd"/>
-                            </svg>
-                        </div>
-
-                        {{ form_widget(form.username, {
-                            'attr': {
-                                'class': 'text-gray-900 text-lg rounded-[30px] block w-full p-2 pl-14 pr-4 mb-8 h-12 leading-12', 'placeholder': 'Username'
-                            }
-                        }) }}
-                        {{ form_errors(form.username) }}
-                    </div>
-                </div>
-
-                <div class="w-[500px] bg-slate-300 rounded-[30px]">
-                    <div class="form-group mx-14 mb-6 relative">
-                        <div class="absolute inset-y-0 left-0 w-[45px] flex items-center pointer-events-none bg-black rounded-l-[30px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF" class="ml-[12px] h-6 w-6">
-                                <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-
-                        {{ form_widget(form.profilePic, {
-                            'attr': {
-                                'class': 'text-gray-900 text-lg rounded-[30px] block w-full p-2 pl-14 pr-4 mb-8 h-12 leading-12', 'placeholder': 'Profile Picture (URL)'
-                            }
-                        }) }}
-                        {{ form_errors(form.profilePic) }}
-                    </div>
-                </div>
-
-
-                <div class="form-group mx-14 mb-6 relative">
-                    <div class="absolute inset-y-0 left-0 w-[45px] flex items-center pointer-events-none bg-black rounded-l-[30px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" class="ml-[12px] h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/>
-                        </svg>
-                    </div>
-
-                    {{ form_widget(form.email, {
-                        'attr': {
-                            'class': 'text-gray-900 text-lg rounded-[30px] block w-full p-2 pl-14 pr-4 mb-8 h-12 leading-12',
-                            'placeholder': 'Email'
-                        }
-                    }) }}
-                    {{ form_errors(form.email) }}
-                </div>
-
-
-                <div class="form-group mx-14 mb-6 relative">
-                    <div class="absolute inset-y-0 left-0 w-[45px] flex items-center pointer-events-none bg-black rounded-l-[30px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="#FFFFFF" class="ml-[12px] h-6 w-6">
-                            <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z" clip-rule="evenodd"/>
-                        </svg>
-                    </div>
-
-                    {{ form_widget(form.password, {
-                        'attr': {
-                            'class': 'text-gray-900 text-lg rounded-[30px] block w-full p-2 pl-14 pr-4 mb-10 h-12 leading-12',
-                            'placeholder': 'Password'
-                        }
-                    }) }}
-                    {{ form_errors(form.password) }}
-                </div>
-
-                <div class="flex justify-center">
-                    <button type="submit" class="w-[180px] relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-[30px] group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-					<span class="w-[180px] relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-[30px] group-hover:bg-opacity-0 text-xl font-semibold">
-						Update profile
-					</span>
-                    </button>
-                </div>
-
-                {{ form_end(form) }}
+                {% for course in courses %}
+                    {{ courses.course_card(course) }}
+                {% endfor %}
             </div>
         </div>
-        <div class="place-items-center place-content-center">
-            {{ include('user/_form.html.twig', {'button_label': 'Update profile'}) }}
-        </div>
+
+
 
         <style>
             .wasili {
