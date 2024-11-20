@@ -83,7 +83,6 @@
 				</div>
 			</div>
 
-
 			<style>
 				.wasili {
 					display: grid;
@@ -95,12 +94,12 @@
 
 		{% block test %}
 		<div class="flex flex-col justify-center items-center">
-			<div class="w-[800px] mx-auto bg-white dark:bg-zinc-800 shadow-md rounded-lg">
-				<div class="flex flex-col h-[400px]">
-					<div class="px-4 py-3 border-b dark:border-zinc-700">
+			<div class="w-[800px] bg-white shadow-md rounded-[30px]">
+				<div class="flex flex-col h-[500px]">
+					<div class="py-3 border-b dark:border-zinc-700">
 						<div class="flex justify-between items-center">
 							<h2 class="text-lg font-semibold text-zinc-800">
-								Chatbot Assistant
+								sewAI Chat
 							</h2>
 							<div class="bg-green-500 text-black text-xs px-2 py-1 rounded-full">
 								Online
@@ -109,31 +108,33 @@
 					</div>
 					<div class="flex-1 p-3 overflow-y-auto flex flex-col space-y-2" id="chatDisplay">
 						{% for message in messages %}
-							<div class="chat-message {{ message.role == 'user' ? 'self-start bg-zinc-500' : 'self-end bg-blue-500' }} text-black max-w-xs rounded-lg px-3 py-1.5 text-sm">
-								<p>{{ message.content }}</p>
+							<div class="chat-message
+            				{% if message.role == 'user' %}
+                				self-end bg-blue-500 text-white
+            				{% else %}
+                				self-start bg-zinc-500 text-black
+            				{% endif %}
+            					max-w-xs rounded-[30px] px-3 py-1.5 text-sm">
+								<p class="p-2">{{ message.content }}</p>
 							</div>
 						{% endfor %}
 					</div>
+
 					<div class="px-3 py-2 border-t dark:border-zinc-700">
 						<div class="flex gap-2">
 							<form id="chat-form" method="POST" class="flex-1">
-								<input
-										type="text"
-										id="message"
-										name="message"
-										placeholder="Type your message..."
-										required
-										class="p-2 border rounded-lg dark:bg-zinc-700 dark:text-white dark:border-zinc-600 text-sm"
-								/>
-								<button
-										type="submit"
-										class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-3 rounded-lg transition duration-300 ease-in-out text-sm"
-								>
-									Send
-								</button>
+								<div class="relative flex items-center w-full">
+									<input type="text" id="message" name="message" placeholder="Type your message..." required class="p-2 border rounded-[30px] dark:bg-zinc-700 dark:border-zinc-600 text-sm w-full pr-16" />
+									<button type="submit" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-[30px] transition duration-300 ease-in-out text-sm flex items-center justify-center">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+											<path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+										</svg>
+									</button>
+								</div>
 							</form>
 						</div>
 					</div>
+
 				</div>
 			</div>
 
