@@ -94,16 +94,13 @@
 
 		{% block test %}
 		<div class="flex flex-col justify-center items-center">
-			<div class="w-[800px]  bg-opacity-50 shadow-md rounded-[30px]">
+			<div class="wholeContainer w-[800px] bg-black shadow-md rounded-[30px]">
 				<div class="flex flex-col h-[500px]">
-					<div class="py-3 border-b dark:border-zinc-700">
-						<div class="flex justify-between items-center">
-							<h2 class="text-lg font-semibold text-zinc-800">
+					<div class="py-3 border-b">
+						<div class="upperContainer flex justify-between items-center w-full">
+							<h2 class="text-2xl font-semibold text-center text-zinc-800 w-full py-4">
 								sewAI Chat
 							</h2>
-							<div class="bg-green-300 text-black text-xs px-2 py-1 rounded-full">
-								Online
-							</div>
 						</div>
 					</div>
 					<div class="flex-1 p-3 overflow-y-auto flex flex-col space-y-2">
@@ -112,9 +109,9 @@
             				{% if message.role == 'user' %}
                 				self-end bg-blue-500 text-white
             				{% else %}
-                				self-start bg-zinc-500 text-black
+                				self-start bg-white text-black
             				{% endif %}
-            					max-w-xs rounded-[30px] px-3 py-1.5 text-sm">
+            					max-w-xs rounded-[30px] px-3 py-1.5 text-lg">
 								<p class="p-2">{{ message.content }}</p>
 							</div>
 						{% endfor %}
@@ -125,7 +122,7 @@
 							<form id="chat-form" method="POST" class="flex-1">
 								<div class="relative flex items-center w-full">
 									<input type="text" id="message" name="message" placeholder="Type your message..." required class="p-2 border rounded-[30px] dark:bg-zinc-700 dark:border-zinc-600 text-sm w-full pr-16" />
-									<button type="submit" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-[30px] transition duration-300 ease-in-out text-sm flex items-center justify-center">
+									<button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-[30px] transition duration-300 ease-in-out text-sm flex items-center justify-center">
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
 											<path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
 										</svg>
@@ -135,59 +132,28 @@
 						</div>
 					</div>
 
+
 				</div>
 			</div>
 
 		</div>
 
 
-			{#<div class="flex flex-col justify-center items-center">
-				<div id="chat-box" class="chat-container">
-					{% for message in messages %}
-						<div class="chat-message {{ message.role }}">
-							<p>{{ message.content }}</p>
-						</div>
-					{% endfor %}
-
-					<form id="chat-form" method="POST">
-						<label for="message">Your Message:</label>
-						<input type="text" id="message" name="message" required>
-						<input type="hidden" name="_method" value="POST">
-						<button type="submit">Send</button>
-					</form>
-				</div>
-			</div>
-
-
 			<style>
-				.chat-container {
-					background-color: lightslategray;
-					border-radius: 30px;
-					padding: 15px;
-					margin: 20px;
-					display: flex;
-					flex-direction: column;
-					width: 850px;
+
+				.wholeContainer {
+					width: 1400px;
+					height: 650px;
 				}
-				.chat-message {
-					margin: 10px 0;
+
+				.upperContainer {
+					background-color: #2F3353;
+					border-top-left-radius: 30px;
+					border-top-right-radius: 30px;
 				}
-				.chat-message.user {
-					text-align: right;
-					color: blue;
-				}
-				.chat-message.ai {
-					text-align: left;
-					color: green;
-				}
-				.chatbox-input {
-					width: 100%;
-					padding: 10px;
-					border: 1px solid #ccc;
-					border-radius: 4px;
-					margin-top: 10px;
-				}
-			</style>#}
+
+
+			</style>
 
 		{% endblock %}
 

@@ -38,7 +38,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="flex items-center p-2 text-slate-800 rounded-lg hover:bg-[#8E99F9] hover:text-white">
+                                <a href="{{ path('viewJourneys') }}" class="flex items-center p-2 text-slate-800 rounded-lg hover:bg-[#8E99F9] hover:text-white">
                                     <svg class="flex-shrink-0 w-5 h-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="#FFF" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"/>
                                     </svg>
@@ -87,9 +87,9 @@
         <div>
 
             <div class="relative w-full h-[136px]">
-                <p class="font-bold text-3xl text-center h-[108px] relative z-10 bg-[#1F2237] text-white py-5 leading-1">Your Journey, Your Way
+                <p class="font-bold text-3xl text-center h-[108px] relative z-10 bg-[#1F2237] text-white py-5 leading-1">Journey Diary
                     <br>
-                    <span class="text-lg font-medium leading-1 text-slate-300">Choose as many paths as you want—take it at your own pace!</span>
+                    <span class="text-lg font-medium leading-1 text-slate-300">Welcome to your personal space to grow, reflect and track.</span>
                 </p>
             </div>
 
@@ -97,7 +97,13 @@
                 {% import '_macros/courses.html.twig' as courses %}
 
                 {% for course in courses %}
-                    {{ courses.course_card(course) }}
+                    <a href="{{ path('dashboard', {'course_id': course.id}) }}" class="flex flex-col items-center overflow-hidden bg-[#1F2237] rounded-[30px] shadow-xl hover:bg-[#0F111B] w-full max-w-[450px]">
+                        <img class="object-cover w-full h-28" src="{{ course.profilePic | default('../imgs/journeyDefaultPfp.png') }}">
+                        <div class="flex flex-col justify-between p-4 leading-normal">
+                            <h5 class="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">{{ course.title }}</h5>
+                            <p class="mb-3 font-normal text-slate-400">{{ course.shortDesc }}</p>
+                        </div>
+                    </a>
                 {% endfor %}
             </div>
         </div>

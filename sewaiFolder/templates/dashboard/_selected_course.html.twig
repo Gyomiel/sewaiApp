@@ -30,7 +30,7 @@
 	{% if selectedCourse %}
 		<div class="courseTemplate">
 			<div id="course-description" class="flex flex-col justify-center items-center">
-				<div class="service-card mx-10 shadow-xl snap-start shrink-0 py-10 px-8 bg-[#1F2237] flex flex-col items-start gap-4 transition-all duration-300 group rounded-[30px]">
+				<div class="service-card mx-10 shadow-xl snap-start shrink-0 py-10 px-8 bg-[#1F2237] flex flex-col items-start gap-4 transition-all duration-300 group rounded-[30px] mt-6">
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="#000000" class="text-6xl h-14 w-14 stroke-slate-300">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z"/>
 					</svg>
@@ -45,7 +45,15 @@
 						{{ selectedCourse.category }}
 					</p>
 				</div>
-				<a href="{{ path('selectJourney', {'courseId': selectedCourse.id}) }}">xd</a>
+
+				<a href="{{ path('selectJourney', {'courseId': selectedCourse.id}) }}" class="relative inline-flex items-center justify-center p-0.5 mb-4 me-2 overflow-hidden text-lg font-semibold text-gray-900 rounded-[30px] group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 mt-6">
+						<span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-[30px] group-hover:bg-opacity-0 flex items-center">
+							Add to My Journeys
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 ml-2">
+  								<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+							</svg>
+						</span>
+				</a>
 			</div>
 
 			<div id="lesson-content" style="display: {% if selectedLesson %} block {% else %} none {% endif %};">
