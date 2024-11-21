@@ -44,10 +44,8 @@ class ChatboxController extends AbstractController
                 $messages[] = ['role' => 'user', 'content' => $userMessage];
 
                 $payload = [
-                    'model' => 'llama3.2',
+                    'model' => 'llama3.2:1b',
                     'prompt' => $userMessage,
-                    'max_tokens' => 300,
-                    'temperature' => 0.5,
                     'stream' => false
                 ];
 
