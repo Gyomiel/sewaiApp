@@ -57,7 +57,7 @@ class ChatboxController extends AbstractController
 
                 $statusCode = $response->getStatusCode();
                 if ($statusCode !== 200) {
-                    $errorDetails = $response->getContent(false); // Get raw error content
+                    $errorDetails = $response->getContent(false);
                     $this->logger->error('API Error - Status Code: ' . $statusCode . ' - ' . $errorDetails);
 
                     return new JsonResponse([
