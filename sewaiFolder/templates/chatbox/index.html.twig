@@ -100,7 +100,7 @@
 		{% block test %}
 			<div class="flex flex-col justify-center items-center">
 				<div class="wholeContainer w-[800px] bg-black shadow-md rounded-[30px]">
-					<div class="flex flex-col h-[500px]">
+					<div class="flex flex-col h-[650px]">
 						<div class="py-3 border-b">
 							<div class="upperContainer flex justify-center items-center w-full">
 								<h2 class="text-2xl text-center font-semibold text-white flex py-4">
@@ -114,24 +114,24 @@
 						<div class="flex-1 p-3 overflow-y-auto flex flex-col space-y-2">
 							{% for message in messages %}
 								<div class="chat-message
-									{% if message.role == 'user' %}
-										self-end bg-blue-500 text-white
-									{% else %}
-										self-start bg-white text-white
-									{% endif %}
-									max-w-xs w-auto rounded-[30px] px-3 py-1.5 text-lg">
+																			{% if message.role == 'user' %}
+																				self-end bg-blue-500 text-white
+																			{% else %}
+																				self-start bg-white text-white
+																			{% endif %}
+																			max-w-xs rounded-[30px] px-3 py-1.5 text-lg">
 									<p class="p-2">{{ message.content }}</p>
 								</div>
 							{% endfor %}
 						</div>
 
-						<div class="px-3 py-2 border-t dark:border-zinc-700">
+						<div class="inputBar px-3 py-2 border-t dark:border-zinc-700">
 							<div class="flex gap-2">
 								<form id="chat-form" method="POST" class="flex-1">
-									<div class="relative flex items-center w-full">
-										<input type="text" id="message" name="message" placeholder="Type your message..." required class="p-2 border rounded-[30px] dark:bg-zinc-700 dark:border-zinc-600 text-sm w-full pr-16"/>
-										<button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-[30px] transition duration-300 ease-in-out text-sm flex items-center justify-center">
-											<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+									<div class="relative flex items-center w-full inputContainer">
+										<input type="text" id="message" name="message" placeholder="Type your message..." required class="p-2 rounded-[30px] dark:bg-zinc-700 text-lg w-full pr-16 flex justify-between"/>
+										<button type="submit" class="sendButton absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 transition duration-300 ease-in-out text-sm flex items-center justify-center">
+											<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="sendSVG">
 												<path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z"/>
 											</svg>
 										</button>
@@ -144,11 +144,29 @@
 			</div>
 
 			<style>
-
+			.sendButton{
+				border-radius:30px
+			}
+			.sendSVG{
+				height: 27px;
+				width: 40px;
+			}
+			#message:focus{
+				outline: none;
+			}
+				.inputBar{
+					 position: sticky;
+					 bottom: 0;
+				}
+				.inputContainer{
+					justify-content: end;
+				}
 				.wholeContainer {
 					width: 1400px;
 					height: 650px;
 					background-color: #F2F3FE;
+					overflow-y: scroll;
+					overflow: hidden;
 				}
 
 				.upperContainer {
@@ -165,6 +183,7 @@
 					max-width: 70%;
 					word-wrap: break-word;
 					margin-bottom: 8px;
+
 				}
 
 				.chat-message.self-end {
@@ -179,6 +198,7 @@
 					font-size: 22px;
 					padding-top: 0.5rem;
 					padding-bottom: 0.5rem;
+					width: fit-content;
 				}
 			</style>
 
