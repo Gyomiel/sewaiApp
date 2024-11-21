@@ -44,8 +44,8 @@ class ChatboxController extends AbstractController
                 $messages[] = ['role' => 'user', 'content' => $userMessage];
 
                 $payload = [
-                    'model' => 'llama3.2:1b',
-                    'prompt' => $userMessage,
+                    'model' => 'llama3.2',
+                    'prompt' => `Please act as a therapist who listens attentively and offers thoughtful advice to the user. Be empathetic, non-judgmental, and supportive. Respond to the user's message with care and understanding. Do not make any list or make words on bold and cursive font. Keep your response within 200 characters. If the user mentions any self-harm thought or idea, mention the phone number 024; it's a Suicide Prevention Hotline.` . $userMessage,
                     'stream' => false
                 ];
 
